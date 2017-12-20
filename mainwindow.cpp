@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QRegExp>
+#include <QColor>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,14 +23,10 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
 
-    //    QStringList parsed = this->parseAttribute("private let str: [String: [String: ([String: String], String: String)] = [String: [String: ([String: String], String: String)])()");
-    //    qDebug() << parsed.first();
-    //    qDebug() << parsed.last();
-
     QString str = ui->moduleName->text();
     qDebug() << str;
-    QString fileName = QFileDialog::getOpenFileName(this,
-                                                    tr("Open Model"), "/home", tr("Image Files (*.Swift)"));
+    QString fileName = "/Projects/B2BOrderingiOS/B2BOrdering/Model/Profile.swift";
+            //QFileDialog::getOpenFileName(this, tr("Open Model"), "/home", tr("Image Files (*.Swift)"));
     qDebug() << fileName;
 
     QFile file(fileName);
@@ -44,13 +41,13 @@ void MainWindow::on_pushButton_clicked()
 
         qDebug() << line;
 
-        bool isAttributeStart = line.contains("// MARK: Attributes End");
-        bool isAttributeEnd = line.contains("// MARK: Attributes Start");
+        bool isAttributeEnd = line.contains("// MARK: Attributes End");
+        bool isAttributeStart = line.contains("// MARK: Attributes Start");
         bool isAttribute = line.contains(" var ") || line.contains(" let ");
 
-        qDebug() << isAttributeStart;
-        qDebug() << isAttributeEnd;
-        qDebug() << isAttribute;
+        qDebug() << "attribute start " << isAttributeStart;
+        qDebug() << "attribute end " << isAttributeEnd;
+        qDebug() << "attribute " << isAttribute;
 
         if (isAttributeEnd) {
             hasAttributeRecStarted = false;
@@ -70,7 +67,8 @@ void MainWindow::on_pushButton_clicked()
     QHashIterator<QString, QString> i(attributes);
     while (i.hasNext()) {
         i.next();
-        qDebug() << i.key() << ": " << i.value() << endl;
+        ui->textEditAttributes->append(i.key() + ": " + i.value());
+//        qDebug() << i.key() << ": " << i.value() << endl;
     }
 
 
@@ -99,7 +97,7 @@ QHash<QString, QString> MainWindow::parseAttribute(QString str) {
     }
 
     QHash<QString, QString> result;
-    result[attributeName] = attributeType;
+    result[attributeName.trimmed()] = attributeType.trimmed();
 
     return result;
 }
