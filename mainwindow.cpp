@@ -9,19 +9,16 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
+    ui(new Ui::MainWindow) {
     attributes = QHash<QString, QString>();
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
-{
+void MainWindow::on_pushButton_clicked() {
 
     QString str = ui->moduleName->text();
     qDebug() << str;
@@ -37,24 +34,21 @@ void MainWindow::on_pushButton_clicked()
 
     while (!file.atEnd()) {
         QByteArray line = file.readLine();
-        ui->textEditFileContent->append(line);
-
-        qDebug() << line;
-
+//        qDebug() << line;
         bool isAttributeEnd = line.contains("// MARK: Attributes End");
         bool isAttributeStart = line.contains("// MARK: Attributes Start");
         bool isAttribute = line.contains(" var ") || line.contains(" let ");
 
-        qDebug() << "attribute start " << isAttributeStart;
-        qDebug() << "attribute end " << isAttributeEnd;
-        qDebug() << "attribute " << isAttribute;
+//        qDebug() << "attribute start " << isAttributeStart;
+//        qDebug() << "attribute end " << isAttributeEnd;
+//        qDebug() << "attribute " << isAttribute;
 
         if (isAttributeEnd) {
             hasAttributeRecStarted = false;
         }
 
         if (hasAttributeRecStarted && isAttribute) {
-            qDebug() << "is attribute : " << line << endl;
+//            qDebug() << "is attribute : " << line << endl;
             QHash<QString, QString> parsed = this->parseAttribute(line);
             this->attributes.unite(parsed);
         }
@@ -100,4 +94,8 @@ QHash<QString, QString> MainWindow::parseAttribute(QString str) {
     result[attributeName.trimmed()] = attributeType.trimmed();
 
     return result;
+}
+
+void MainWindow::on_pushButtonModel_1_clicked() {
+
 }
