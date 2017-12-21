@@ -16,10 +16,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_pushButtonModel_1_clicked();
+
 private:
     Ui::MainWindow *ui;
-    QHash<QString, QString> attributes;
+    QList<QHash<QString, QString>> attributes;
+
     QHash<QString, QString> parseAttribute(QString str);
+    void openFileAndExtractAttributes();
 };
 
 #endif // MAINWINDOW_H
