@@ -110,7 +110,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item row="6" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <layout class="QVBoxLayout" name="verticalLayout_25">
           <item>
            <widget class="QPushButton" name="pushButtonModel_5">
             <property name="minimumSize">
@@ -124,10 +124,29 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonModelRemove_5">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Remove Model</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item row="4" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <layout class="QVBoxLayout" name="verticalLayout_23">
           <item>
            <widget class="QPushButton" name="pushButtonModel_3">
             <property name="minimumSize">
@@ -141,10 +160,29 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonModelRemove_3">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Remove Model</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item row="2" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <layout class="QVBoxLayout" name="verticalLayout_22">
           <item>
            <widget class="QPushButton" name="pushButtonModel_2">
             <property name="minimumSize">
@@ -155,6 +193,25 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="text">
              <string>Add Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonModelRemove_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Remove Model</string>
             </property>
            </widget>
           </item>
@@ -240,7 +297,10 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetFixedSize</enum>
+          </property>
           <item>
            <widget class="QPushButton" name="pushButtonModel_1">
             <property name="minimumSize">
@@ -251,12 +311,31 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="maximumSize">
              <size>
-              <width>150</width>
+              <width>16777215</width>
               <height>16777215</height>
              </size>
             </property>
             <property name="text">
              <string>Add Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonModelRemove">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Remove Model</string>
             </property>
            </widget>
           </item>
@@ -421,7 +500,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item row="5" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <layout class="QVBoxLayout" name="verticalLayout_24">
           <item>
            <widget class="QPushButton" name="pushButtonModel_4">
             <property name="minimumSize">
@@ -432,6 +511,25 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="text">
              <string>Add Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonModelRemove_4">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Remove Model</string>
             </property>
            </widget>
           </item>
@@ -605,7 +703,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </item>
         <item row="7" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <layout class="QVBoxLayout" name="verticalLayout_26">
           <item>
            <widget class="QPushButton" name="pushButtonModel_6">
             <property name="minimumSize">
@@ -616,6 +714,25 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="text">
              <string>Add Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonModelRemove_6">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Remove Model</string>
             </property>
            </widget>
           </item>
