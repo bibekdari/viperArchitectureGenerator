@@ -61,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
     uiComponents.append(component4);
     uiComponents.append(component5);
     uiComponents.append(component6);
+
 }
 
 MainWindow::~MainWindow() {
