@@ -30,19 +30,19 @@
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="4" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item row="7" column="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_10">
+           <layout class="QVBoxLayout" name="verticalLayout_19">
             <item>
-             <widget class="QLabel" name="labelModelName_3">
+             <widget class="QLabel" name="labelModelName_6">
               <property name="text">
                <string>Model Attributes</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditAttributesModel_3">
+             <widget class="QTextEdit" name="textEditAttributesModel_6">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -58,16 +58,12 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_11">
+           <layout class="QVBoxLayout" name="verticalLayout_20">
             <item>
-             <widget class="QLabel" name="labelStructureName_3">
-              <property name="text">
-               <string>Structure</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="lineEditStructureName_6"/>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditStructureModel_3">
+             <widget class="QTextEdit" name="textEditStructureModel_6">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -83,16 +79,12 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_12">
+           <layout class="QVBoxLayout" name="verticalLayout_21">
             <item>
-             <widget class="QLabel" name="labelViewModelName_3">
-              <property name="text">
-               <string>View Model</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="lineEditViewModelName_6"/>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditViewModel_3">
+             <widget class="QTextEdit" name="textEditViewModel_6">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -109,10 +101,10 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="6" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_25">
+        <item row="5" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_24">
           <item>
-           <widget class="QPushButton" name="pushButtonModel_5">
+           <widget class="QPushButton" name="pushButtonModel_4">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -125,7 +117,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButtonModelRemove_5">
+           <widget class="QPushButton" name="pushButtonModelRemove_4">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -145,91 +137,19 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="4" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_23">
+        <item row="6" column="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
           <item>
-           <widget class="QPushButton" name="pushButtonModel_3">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Add Model</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonModelRemove_3">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Remove Model</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="2" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_22">
-          <item>
-           <widget class="QPushButton" name="pushButtonModel_2">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Add Model</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonModelRemove_2">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Remove Model</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="5" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_13">
+           <layout class="QVBoxLayout" name="verticalLayout_16">
             <item>
-             <widget class="QLabel" name="labelModelName_4">
+             <widget class="QLabel" name="labelModelName_5">
               <property name="text">
                <string>Model Attributes</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditAttributesModel_4">
+             <widget class="QTextEdit" name="textEditAttributesModel_5">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -245,16 +165,97 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_14">
+           <layout class="QVBoxLayout" name="verticalLayout_17">
             <item>
-             <widget class="QLabel" name="labelStructureName_4">
+             <widget class="QLineEdit" name="lineEditStructureName_5"/>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="textEditStructureModel_5">
+              <property name="readOnly">
+               <bool>false</bool>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_18">
+            <item>
+             <widget class="QLineEdit" name="lineEditViewModelName_5"/>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="textEditViewModel_5">
+              <property name="readOnly">
+               <bool>false</bool>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Model</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelModelName_1">
+              <property name="text">
+               <string>Model Attributes</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="textEditAttributesModel_1">
+              <property name="readOnly">
+               <bool>false</bool>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QLabel" name="label_2">
               <property name="text">
                <string>Structure</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditStructureModel_4">
+             <widget class="QLineEdit" name="lineEditStructureName_1"/>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="textEditStructureModel_1">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -270,16 +271,19 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_15">
+           <layout class="QVBoxLayout" name="verticalLayout_6">
             <item>
-             <widget class="QLabel" name="labelViewModelName_4">
+             <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>View Model</string>
+               <string>ViewModel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditViewModel_4">
+             <widget class="QLineEdit" name="lineEditViewModelName_1"/>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="textEditViewModel_1">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -341,168 +345,10 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="1" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item row="2" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_22">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_4">
-            <item>
-             <widget class="QLabel" name="labelModelName_1">
-              <property name="text">
-               <string>Model Attributes</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTextEdit" name="textEditAttributesModel_1">
-              <property name="readOnly">
-               <bool>false</bool>
-              </property>
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_5">
-            <item>
-             <widget class="QLabel" name="labelStructureName_1">
-              <property name="text">
-               <string>Structure</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTextEdit" name="textEditStructureModel_1">
-              <property name="readOnly">
-               <bool>false</bool>
-              </property>
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_6">
-            <item>
-             <widget class="QLabel" name="labelViewModelName_1">
-              <property name="text">
-               <string>View Model</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTextEdit" name="textEditViewModel_1">
-              <property name="readOnly">
-               <bool>false</bool>
-              </property>
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item row="6" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_11">
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_16">
-            <item>
-             <widget class="QLabel" name="labelModelName_5">
-              <property name="text">
-               <string>Model Attributes</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTextEdit" name="textEditAttributesModel_5">
-              <property name="readOnly">
-               <bool>false</bool>
-              </property>
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_17">
-            <item>
-             <widget class="QLabel" name="labelStructureName_5">
-              <property name="text">
-               <string>Structure</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTextEdit" name="textEditStructureModel_5">
-              <property name="readOnly">
-               <bool>false</bool>
-              </property>
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_18">
-            <item>
-             <widget class="QLabel" name="labelViewModelName_5">
-              <property name="text">
-               <string>View Model</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QTextEdit" name="textEditViewModel_5">
-              <property name="readOnly">
-               <bool>false</bool>
-              </property>
-              <property name="html">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item row="5" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_24">
-          <item>
-           <widget class="QPushButton" name="pushButtonModel_4">
+           <widget class="QPushButton" name="pushButtonModel_2">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -515,7 +361,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButtonModelRemove_4">
+           <widget class="QPushButton" name="pushButtonModelRemove_2">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -535,19 +381,91 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="2" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item row="4" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_23">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_7">
+           <widget class="QPushButton" name="pushButtonModel_3">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Add Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonModelRemove_3">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Remove Model</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="6" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_25">
+          <item>
+           <widget class="QPushButton" name="pushButtonModel_5">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Add Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonModelRemove_5">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Remove Model</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_10">
             <item>
-             <widget class="QLabel" name="labelModelName_2">
+             <widget class="QLabel" name="labelModelName_3">
               <property name="text">
                <string>Model Attributes</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditAttributesModel_2">
+             <widget class="QTextEdit" name="textEditAttributesModel_3">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -563,16 +481,12 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_8">
+           <layout class="QVBoxLayout" name="verticalLayout_11">
             <item>
-             <widget class="QLabel" name="labelStructureName_2">
-              <property name="text">
-               <string>Structure</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="lineEditStructureName_3"/>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditStructureModel_2">
+             <widget class="QTextEdit" name="textEditStructureModel_3">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -588,16 +502,12 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_9">
+           <layout class="QVBoxLayout" name="verticalLayout_12">
             <item>
-             <widget class="QLabel" name="labelViewModelName_2">
-              <property name="text">
-               <string>View Model</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="lineEditViewModelName_3"/>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditViewModel_2">
+             <widget class="QTextEdit" name="textEditViewModel_3">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -611,6 +521,42 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
            </layout>
+          </item>
+         </layout>
+        </item>
+        <item row="7" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_26">
+          <item>
+           <widget class="QPushButton" name="pushButtonModel_6">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Add Model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonModelRemove_6">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Remove Model</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -702,55 +648,19 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </item>
-        <item row="7" column="0">
-         <layout class="QVBoxLayout" name="verticalLayout_26">
+        <item row="2" column="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
-           <widget class="QPushButton" name="pushButtonModel_6">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Add Model</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonModelRemove_6">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Remove Model</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="7" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_13">
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_19">
+           <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
-             <widget class="QLabel" name="labelModelName_6">
+             <widget class="QLabel" name="labelModelName_2">
               <property name="text">
                <string>Model Attributes</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditAttributesModel_6">
+             <widget class="QTextEdit" name="textEditAttributesModel_2">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -766,16 +676,12 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_20">
+           <layout class="QVBoxLayout" name="verticalLayout_8">
             <item>
-             <widget class="QLabel" name="labelStructureName_6">
-              <property name="text">
-               <string>Structure</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="lineEditStructureName_2"/>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditStructureModel_6">
+             <widget class="QTextEdit" name="textEditStructureModel_2">
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -791,16 +697,83 @@ p, li { white-space: pre-wrap; }
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_21">
+           <layout class="QVBoxLayout" name="verticalLayout_9">
             <item>
-             <widget class="QLabel" name="labelViewModelName_6">
+             <widget class="QLineEdit" name="lineEditViewModelName_2"/>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="textEditViewModel_2">
+              <property name="readOnly">
+               <bool>false</bool>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item row="5" column="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_13">
+            <item>
+             <widget class="QLabel" name="labelModelName_4">
               <property name="text">
-               <string>View Model</string>
+               <string>Model Attributes</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEditViewModel_6">
+             <widget class="QTextEdit" name="textEditAttributesModel_4">
+              <property name="readOnly">
+               <bool>false</bool>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_14">
+            <item>
+             <widget class="QLineEdit" name="lineEditStructureName_4"/>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="textEditStructureModel_4">
+              <property name="readOnly">
+               <bool>false</bool>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_15">
+            <item>
+             <widget class="QLineEdit" name="lineEditViewModelName_4"/>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="textEditViewModel_4">
               <property name="readOnly">
                <bool>false</bool>
               </property>

@@ -2,21 +2,22 @@
 #include <QWidget>
 #include <QLabel>
 #include <QTextEdit>
+#include <QLineEdit>
 
 struct UIComponents {
    QTextEdit *model;
    QTextEdit *structure;
    QTextEdit *viewModel;
    QLabel *modelName;
-   QLabel *structureName;
-   QLabel *viewModelName;
+   QLineEdit *structureName;
+   QLineEdit *viewModelName;
 
     UIComponents (QTextEdit *model,
                   QLabel *modelName,
                   QTextEdit *structure,
-                  QLabel *structureName,
+                  QLineEdit *structureName,
                   QTextEdit *viewModel,
-                  QLabel *viewModelName) {
+                  QLineEdit *viewModelName) {
         this->model = model;
         this->modelName = modelName;
         this->structure = structure;
