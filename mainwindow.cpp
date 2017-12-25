@@ -25,6 +25,29 @@ void MainWindow::on_pushButtonAddModelFile_clicked() {
     this->openFileAndExtractAttributes();
 }
 
+void MainWindow::on_pushButtonRemoveModel_clicked() {
+    QModelIndexList selectedIndex = ui->listWidgetAllModels->selectionModel()->selectedIndexes();
+
+    QListIterator<QModelIndex> i(selectedIndex);
+    while (i.hasNext()) {
+        int index = i.next().row();
+        models["models"].removeAt(index);
+        ui->listWidgetAllModels->reset();
+        delete ui->listWidgetAllModels->takeItem(index);
+    }
+
+    if (models["models"].length() > 0) {
+        populateSelectedModelAttributes(0);
+    }else {
+        clearSelectedModelAttributes();
+    }
+}
+
+void MainWindow::clearSelectedModelAttributes() {
+    ui->labelSelectedModelName->setText("");
+    ui->listWidgetSelectedModelAttributes->clear();
+}
+
 void MainWindow::on_listWidgetAllModels_currentRowChanged(int currentRow) {
     this->populateSelectedModelAttributes(currentRow);
 }

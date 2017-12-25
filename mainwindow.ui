@@ -164,7 +164,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_9">
               <item>
-               <widget class="QPushButton" name="pushButtonModelRemove_3">
+               <widget class="QPushButton" name="pushButtonRemoveModel">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>

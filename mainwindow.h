@@ -19,8 +19,9 @@ public:
 
 private slots:
     void on_pushButtonAddModelFile_clicked();
-
     void on_listWidgetAllModels_currentRowChanged(int currentRow);
+
+    void on_pushButtonRemoveModel_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -31,6 +32,7 @@ private:
     void openFileAndExtractAttributes();
 
     void populateSelectedModelAttributes(int index);
+    void clearSelectedModelAttributes();
 
     void showError(QString text);
 };
