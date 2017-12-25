@@ -287,6 +287,13 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonCreateViewModelForSelectedStructures">
+              <property name="text">
+               <string>Create View Models for Selected Structures</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -305,7 +312,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_4">
+             <widget class="QListWidget" name="listWidgetAllViewModels">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -335,7 +342,7 @@
              </layout>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButtonModelRemove">
+             <widget class="QPushButton" name="pushButtonRemoveViewModel">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -536,14 +543,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="labelSelectedModelName_3">
+             <widget class="QLabel" name="labelSelectedViewModelName">
               <property name="text">
                <string>TextLabel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_3">
+             <widget class="QListWidget" name="listWidgetSelectedViewModelAttributes">
               <property name="dragEnabled">
                <bool>true</bool>
               </property>

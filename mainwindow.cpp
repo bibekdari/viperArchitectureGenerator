@@ -13,8 +13,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    swiftUIs << "UIButton" << "UILabel" << "UIImageView" << "UITextFied" << "UITextView";
+    swiftDataTypes << "Double" << "Int" << "Float" << "String" << "NSNumber" << "Bool" << "UInt";
+
     models = QList<Model>();
     structures = QList<Structure>();
+    viewModels = QList<ViewModel>();
 }
 
 MainWindow::~MainWindow() {
@@ -56,7 +60,7 @@ void MainWindow::on_pushButtonCreateStructureForSelectedModels_clicked() {
         int index = i.next().row();
         Model model = models[index];
         Structure structure = Structure();
-        structure.name = model.name + "Structure";
+        structure.name = ui->moduleName->text() + model.name + "Structure";
         structure.attributes = QHash<QString, QHash<QString, QString>>();
         structure.attributes[model.name] = model.attributes;
 
@@ -95,7 +99,60 @@ void MainWindow::on_pushButtonRemoveStructure_clicked() {
     }
 }
 
-// Actions
+void MainWindow::on_pushButtonCreateViewModelForSelectedStructures_clicked() {
+    ui->listWidgetAllViewModels->reset();
+
+    QModelIndexList selectedIndex = ui->listWidgetAllStructures->selectionModel()->selectedIndexes();
+    QListIterator<QModelIndex> i(selectedIndex);
+    while (i.hasNext()) {
+        int index = i.next().row();
+        Structure structure = structures[index];
+        ViewModel viewModel = ViewModel();
+
+        QString viewModelName = structure.name;
+        viewModelName.replace("Structure", "ViewModel");
+
+        viewModel.name = viewModelName;
+        viewModel.attributes = QHash<QString, QHash<QString, QString>>();
+
+        QHash<QString, QString> allAttributes = QHash<QString, QString>();
+
+        QHashIterator<QString, QHash<QString, QString>> i(structure.attributes);
+        while (i.hasNext()) {
+            i.next();
+            QHash<QString, QString> attributes = i.value();
+            QHashIterator<QString, QString> j(attributes);
+            while(j.hasNext()) {
+                j.next();
+                allAttributes[j.key()] = j.value();
+            }
+        }
+
+
+
+
+
+        viewModel.attributes[structure.name] = allAttributes;
+
+        int viewModelIndex = indexOfStructure(viewModel.name);
+        if (viewModelIndex >= 0) {
+            structures.removeAt(viewModelIndex);
+            delete ui->listWidgetAllViewModels->takeItem(viewModelIndex);
+        }
+        viewModels.append(viewModel);
+        ui->listWidgetAllViewModels->addItem(viewModel.name);
+    }
+
+    if (structures.length() > 0) {
+        populateSelectedViewModelAttributes(0);
+    }
+}
+
+
+
+// ACTIONS
+
+// Models
 
 void MainWindow::populateSelectedModelAttributes(int index) {
     ui->listWidgetSelectedModelAttributes->clear();
@@ -115,6 +172,7 @@ void MainWindow::clearSelectedModelAttributes() {
     ui->listWidgetSelectedModelAttributes->clear();
 }
 
+// Structures
 
 void MainWindow::populateSelectedStructureAttributes(int index) {
     ui->listWidgetSelectedStructureAttributes->clear();
@@ -138,6 +196,33 @@ void MainWindow::clearSelectedStructureAttributes() {
     ui->labelSelectedStructureName->setText("");
     ui->listWidgetSelectedStructureAttributes->clear();
 }
+
+// View Models
+
+void MainWindow::populateSelectedViewModelAttributes(int index) {
+    ui->listWidgetSelectedViewModelAttributes->clear();
+    ViewModel viewModel = viewModels[index];
+    QHashIterator<QString, QHash<QString, QString>> i(viewModel.attributes);
+    while (i.hasNext()) {
+        i.next();
+        QHash<QString, QString> attributes = i.value();
+        QHashIterator<QString, QString> j(attributes);
+        while(j.hasNext()) {
+            j.next();
+            QString text = i.key() + " -> " + j.key() + ": " + j.value();
+            ui->listWidgetSelectedViewModelAttributes->addItem(text);
+        }
+    }
+
+    ui->labelSelectedViewModelName->setText(viewModel.name);
+}
+
+void MainWindow::clearSelectedViewModelAttributes() {
+    ui->labelSelectedViewModelName->setText("");
+    ui->listWidgetSelectedViewModelAttributes->clear();
+}
+
+// Others
 
 void MainWindow::showError(QString text) {
     QMessageBox messageBox;
@@ -246,4 +331,3 @@ QHash<QString, QString> MainWindow::parseAttribute(QString str) {
 
     return result;
 }
-

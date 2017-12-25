@@ -13,3 +13,8 @@ struct Structure {
     QString name;
     QHash<QString, QHash<QString, QString>> attributes;
 };
+
+struct ViewModel {
+    QString name;
+    QHash<QString, QHash<QString, QString>> attributes;
+};
