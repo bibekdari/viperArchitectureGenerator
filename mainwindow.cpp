@@ -78,11 +78,11 @@ void MainWindow::on_pushButtonCreateNewModel_clicked() {
     }
 
     Model model = Model();
-    model.name = modelName;
+    model.name = getModuleName() + modelName;
     model.attributes = QHash<QString, QString>();
     models.append(model);
 
-    ui->listWidgetAllModels->addItem(modelName);
+    ui->listWidgetAllModels->addItem(model.name);
 
     if (models.length() == 1) {
         populateSelectedModelAttributes(0);
@@ -105,7 +105,7 @@ void MainWindow::on_pushButtonCreateStructureForSelectedModels_clicked() {
         int index = i.next().row();
         Model model = models[index];
         Structure structure = Structure();
-        structure.name = ui->moduleName->text() + model.name + "Structure";
+        structure.name = getModuleName() + model.name + "Structure";
         structure.attributes = QHash<QString, QHash<QString, QString>>();
         structure.attributes[model.name] = model.attributes;
 
@@ -163,11 +163,11 @@ void MainWindow::on_pushButtonCreateNewStructure_clicked() {
     }
 
     Structure structure = Structure();
-    structure.name = structureName;
+    structure.name = getModuleName() + structureName;
     structure.attributes = QHash<QString, QHash<QString, QString>>();
     structures.append(structure);
 
-    ui->listWidgetAllStructures->addItem(structureName);
+    ui->listWidgetAllStructures->addItem(structure.name);
 
     if (structures.length() == 1) {
         populateSelectedStructureAttributes(0);
@@ -265,11 +265,11 @@ void MainWindow::on_pushButtonCreateNewViewModel_clicked() {
     }
 
     ViewModel viewModel = ViewModel();
-    viewModel.name = viewModelName;
+    viewModel.name = getModuleName() + viewModelName;
     viewModel.attributes = QHash<QString, QHash<QString, QString>>();
     viewModels.append(viewModel);
 
-    ui->listWidgetAllViewModels->addItem(viewModelName);
+    ui->listWidgetAllViewModels->addItem(viewModel.name);
 
     if (viewModels.length() == 1) {
         populateSelectedViewModelAttributes(0);
@@ -417,18 +417,21 @@ int MainWindow::indexOfStructure(QString name) {
 }
 
 bool MainWindow::isModuleNameValid() {
+    return validateName(getModuleName(), "Module name");
+}
+
+QString MainWindow::getModuleName() {
     QString moduleName = ui->moduleName->text();
-    validateName(moduleName, "Module name");
+    moduleName.replace(QRegularExpression("[\\s\\n\\r]+"), "");
+    return moduleName;
 }
 
 // Private functions: Handle model file and model attributes
 void MainWindow::openFileAndExtractAttributes() {
-
-    QString str = ui->moduleName->text();
     QString fileName = "/Projects/B2BOrderingiOS/B2BOrdering/Model/Profile.swift";
     //    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Model"), "/home", tr("Image Files (*.Swift)"));
 
-    QString moduleName = ui->moduleName->text();
+    QString moduleName = getModuleName();
     QString modelName = this->getModelName(fileName);
 
     if (!isModelUnique(modelName)) {

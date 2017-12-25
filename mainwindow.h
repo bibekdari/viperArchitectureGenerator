@@ -61,6 +61,7 @@ private:
 
     int indexOfStructure(QString name);
     bool isModuleNameValid();
+    QString getModuleName();
 };
 
 #endif // MAINWINDOW_H
