@@ -133,7 +133,7 @@ void MainWindow::on_listWidgetAllStructures_currentRowChanged(int currentRow) {
 }
 
 void MainWindow::on_pushButtonRemoveStructure_clicked() {
-     // get selected index, remove items from structures and ui
+    // get selected index, remove items from structures and ui
     QModelIndexList selectedIndex = ui->listWidgetAllStructures->selectionModel()->selectedIndexes();
     QListIterator<QModelIndex> i(selectedIndex);
     while (i.hasNext()) {
@@ -232,20 +232,20 @@ void MainWindow::on_pushButtonCreateViewModelForSelectedStructures_clicked() {
 
 void MainWindow::on_pushButtonRemoveViewModel_clicked() {
     // get selected index, remove items from view models and ui
-   QModelIndexList selectedIndex = ui->listWidgetAllViewModels->selectionModel()->selectedIndexes();
-   QListIterator<QModelIndex> i(selectedIndex);
-   while (i.hasNext()) {
-       int index = i.next().row();
-       viewModels.removeAt(index);
-       ui->listWidgetAllViewModels->reset();
-       delete ui->listWidgetAllViewModels->takeItem(index);
-   }
+    QModelIndexList selectedIndex = ui->listWidgetAllViewModels->selectionModel()->selectedIndexes();
+    QListIterator<QModelIndex> i(selectedIndex);
+    while (i.hasNext()) {
+        int index = i.next().row();
+        viewModels.removeAt(index);
+        ui->listWidgetAllViewModels->reset();
+        delete ui->listWidgetAllViewModels->takeItem(index);
+    }
 
-   if (viewModels.length() > 0) {
-       populateSelectedViewModelAttributes(0);
-   }else {
-       clearSelectedViewModelAttributes();
-   }
+    if (viewModels.length() > 0) {
+        populateSelectedViewModelAttributes(0);
+    }else {
+        clearSelectedViewModelAttributes();
+    }
 }
 
 void MainWindow::on_listWidgetAllViewModels_currentRowChanged(int currentRow) {
@@ -287,6 +287,7 @@ void MainWindow::on_pushButtonCreateNewViewModel_clicked() {
 // Models
 
 void MainWindow::populateSelectedModelAttributes(int index) {
+    ui->listWidgetSelectedModelAttributes->reset();
     ui->listWidgetSelectedModelAttributes->clear();
 
     Model model = models[index];
@@ -303,6 +304,7 @@ void MainWindow::populateSelectedModelAttributes(int index) {
 void MainWindow::clearSelectedModelAttributes() {
     ui->labelSelectedModelName->setText("");
     ui->listWidgetSelectedModelAttributes->clear();
+    ui->lineEditSelectedModelAttributeName->setText("");
     selectedModel = Model();
 }
 
@@ -371,13 +373,50 @@ void MainWindow::on_listWidgetSelectedModelAttributes_currentRowChanged(int curr
 }
 
 void MainWindow::on_listWidgetSelectedStructureAttributes_currentRowChanged(int currentRow) {
-    QString text = ui->listWidgetSelectedStructureAttributes->currentItem()->text();
-    ui->lineEditSelectedStructureAttributeName->setText(text);
+    //    QString text = ui->listWidgetSelectedStructureAttributes->currentItem()->text();
+    //    ui->lineEditSelectedStructureAttributeName->setText(text);
 }
 
 void MainWindow::on_listWidgetSelectedViewModelAttributes_currentRowChanged(int currentRow) {
-    QString text = ui->listWidgetSelectedViewModelAttributes->currentItem()->text();
-    ui->lineEditSelectedViewModelAttributeName->setText(text);
+    //    QString text = ui->listWidgetSelectedViewModelAttributes->currentItem()->text();
+    //    ui->lineEditSelectedViewModelAttributeName->setText(text);
+}
+
+void MainWindow::on_pushButtonAddUpdateModelAttribute_clicked() {
+
+    QString text = ui->lineEditSelectedModelAttributeName->text();
+    if (text.trimmed().length() == 0) {
+        return;
+    }
+    int index = indexOfModel(selectedModel.name);
+    if (index >= 0) {
+        if (ui->listWidgetSelectedModelAttributes->currentRow() >= 0) {
+            QString oldText = ui->listWidgetSelectedModelAttributes->currentItem()->text();
+            KeyVal oldAttributes = parseAttribute(oldText);
+            selectedModel.attributes.remove(oldAttributes.key);
+        }
+
+        KeyVal attribute = parseAttribute(text);
+        selectedModel.attributes[attribute.key] = attribute.value;
+        models[index] = selectedModel;
+        populateSelectedModelAttributes(index);
+    }
+}
+
+void MainWindow::on_pushButtonRemoveSelectedAttributes_clicked() {
+    // get selected index, remove items from attributes of selected models and ui
+    QModelIndexList selectedIndexes = ui->listWidgetSelectedModelAttributes->selectionModel()->selectedIndexes();
+    ui->listWidgetSelectedModelAttributes->reset();
+
+    foreach (QModelIndex index, selectedIndexes) {
+        QString text = index.data(Qt::DisplayRole).toString();
+        selectedModel.attributes.remove(parseAttribute(text).key);
+        delete ui->listWidgetSelectedModelAttributes->takeItem(index.row());
+    }
+    int index = indexOfModel(selectedModel.name);
+    if (index >= 0) {
+        models[index] = selectedModel;
+    }
 }
 
 // Others
@@ -447,6 +486,24 @@ int MainWindow::indexOfStructure(QString name) {
     return -1;
 }
 
+int MainWindow::indexOfModel(QString name) {
+    for (int i=0; i<models.length(); i++) {
+        if (models[i].name == name) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int MainWindow::indexOfViewModel(QString name) {
+    for (int i=0; i<viewModels.length(); i++) {
+        if (viewModels[i].name == name) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 bool MainWindow::isModuleNameValid() {
     return validateName(getModuleName(), "Module name");
 }
@@ -489,8 +546,8 @@ void MainWindow::openFileAndExtractAttributes() {
         }
 
         if (hasAttributeRecStarted && isAttribute) {
-            QHash<QString, QString> parsed = this->parseAttribute(line);
-            attributes.unite(parsed);
+            KeyVal parsed = this->parseAttribute(line);
+            attributes[parsed.key] = parsed.value;
         }
 
         if (isAttributeStart) {
@@ -518,7 +575,7 @@ QString MainWindow::getModelName(QString fileName) {
     return splitted.last();
 }
 
-QHash<QString, QString> MainWindow::parseAttribute(QString str) {
+KeyVal MainWindow::parseAttribute(QString str) {
     QStringList splitted = str.split(" = ");
 
     QString declarationPart = splitted.first();
@@ -538,8 +595,9 @@ QHash<QString, QString> MainWindow::parseAttribute(QString str) {
         attributeType += (((i == 1) ? "" : ": ") + splitted[i]);
     }
 
-    QHash<QString, QString> result;
-    result[attributeName.trimmed()] = attributeType.trimmed();
+    KeyVal result = KeyVal();
+    result.key = attributeName.trimmed();
+    result.value = attributeType.trimmed();
 
     return result;
 }

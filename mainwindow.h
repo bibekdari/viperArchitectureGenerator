@@ -32,6 +32,10 @@ private slots:
     void on_pushButtonCreateNewStructure_clicked();
     void on_pushButtonCreateNewViewModel_clicked();
     void on_listWidgetSelectedModelAttributes_currentRowChanged(int currentRow);
+    void on_listWidgetSelectedStructureAttributes_currentRowChanged(int currentRow);
+    void on_listWidgetSelectedViewModelAttributes_currentRowChanged(int currentRow);
+    void on_pushButtonAddUpdateModelAttribute_clicked();
+    void on_pushButtonRemoveSelectedAttributes_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -45,7 +49,7 @@ private:
     Structure selectedStructure;
     ViewModel selectedViewModel;
 
-    QHash<QString, QString> parseAttribute(QString str);
+    KeyVal parseAttribute(QString str);
     QString getModelName(QString fileName);
     void openFileAndExtractAttributes();
 
@@ -63,6 +67,8 @@ private:
     void showError(QString text);
 
     int indexOfStructure(QString name);
+    int indexOfModel(QString name);
+    int indexOfViewModel(QString name);
     bool isModuleNameValid();
     QString getModuleName();
 };

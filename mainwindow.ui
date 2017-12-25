@@ -24,7 +24,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-180</y>
+         <y>0</y>
          <width>944</width>
          <height>1410</height>
         </rect>
@@ -410,14 +410,14 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_17">
               <item>
-               <widget class="QPushButton" name="pushButton_17">
+               <widget class="QPushButton" name="pushButtonAddUpdateModelAttribute">
                 <property name="text">
                  <string>Add/Update</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_9">
+               <widget class="QPushButton" name="pushButtonRemoveSelectedAttributes">
                 <property name="text">
                  <string>Remove</string>
                 </property>
@@ -487,17 +487,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditSelectedStructureAttributeName"/>
-            </item>
-            <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
-              <item>
-               <widget class="QPushButton" name="pushButton_3">
-                <property name="text">
-                 <string>Update</string>
-                </property>
-               </widget>
-              </item>
               <item>
                <widget class="QPushButton" name="pushButton_4">
                 <property name="text">
@@ -569,17 +559,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditSelectedViewModelAttributeName"/>
-            </item>
-            <item>
              <layout class="QHBoxLayout" name="horizontalLayout_5">
-              <item>
-               <widget class="QPushButton" name="pushButton_12">
-                <property name="text">
-                 <string>Update</string>
-                </property>
-               </widget>
-              </item>
               <item>
                <widget class="QPushButton" name="pushButton_13">
                 <property name="text">

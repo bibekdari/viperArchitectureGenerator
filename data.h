@@ -18,3 +18,8 @@ struct ViewModel {
     QString name;
     QHash<QString, QHash<QString, QString>> attributes;
 };
+
+struct KeyVal {
+    QString key;
+    QString value;
+};
