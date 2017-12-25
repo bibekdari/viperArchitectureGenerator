@@ -25,7 +25,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QHash<QString, QList<Model>> models;
+    QList<Model> models;
+    QList<Structure> structures;
 
     QHash<QString, QString> parseAttribute(QString str);
     QString getModelName(QString fileName);

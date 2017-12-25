@@ -8,3 +8,8 @@ struct Model {
     QString filePath;
     QHash<QString, QString> attributes;
 };
+
+struct Structure {
+    QString name;
+    QHash<QString, QHash<QString, QString>> attributes;
+};

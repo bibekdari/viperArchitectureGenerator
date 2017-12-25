@@ -13,7 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    models = QHash<QString, QList<Model>>();
+    models = QList<Model>();
+    structures = QList<Structure>();
 }
 
 MainWindow::~MainWindow() {
@@ -31,12 +32,12 @@ void MainWindow::on_pushButtonRemoveModel_clicked() {
     QListIterator<QModelIndex> i(selectedIndex);
     while (i.hasNext()) {
         int index = i.next().row();
-        models["models"].removeAt(index);
+        models.removeAt(index);
         ui->listWidgetAllModels->reset();
         delete ui->listWidgetAllModels->takeItem(index);
     }
 
-    if (models["models"].length() > 0) {
+    if (models.length() > 0) {
         populateSelectedModelAttributes(0);
     }else {
         clearSelectedModelAttributes();
@@ -55,7 +56,7 @@ void MainWindow::on_listWidgetAllModels_currentRowChanged(int currentRow) {
 // Actions
 
 void MainWindow::populateSelectedModelAttributes(int index) {
-    Model model = models["models"][index];
+    Model model = models[index];
     QHashIterator<QString, QString> i(model.attributes);
     while (i.hasNext()) {
         i.next();
@@ -83,7 +84,7 @@ void MainWindow::openFileAndExtractAttributes() {
     QString moduleName = ui->moduleName->text();
     QString modelName = this->getModelName(fileName);
 
-    QListIterator<Model> i(models["models"]);
+    QListIterator<Model> i(models);
     while (i.hasNext()) {
         if ( modelName == i.next().name) {
             this->showError("Duplicate model name.");
@@ -123,16 +124,13 @@ void MainWindow::openFileAndExtractAttributes() {
     model.attributes = attributes;
     model.filePath = fileName;
     model.name = modelName;
-
-    if (models["models"].length() == 0) {
-        models["models"] = QList<Model>();
-        models["models"].append(model);
-        this->populateSelectedModelAttributes(0);
-    }else {
-        models["models"].append(model);
-    }
-
+    models.append(model);
     ui->listWidgetAllModels->addItem(modelName);
+
+
+    if (models.length() == 1) {
+        this->populateSelectedModelAttributes(0);
+    }
 }
 
 QString MainWindow::getModelName(QString fileName) {
