@@ -20,6 +20,8 @@ public:
 private slots:
     void on_pushButtonAddModelFile_clicked();
 
+    void on_listWidgetAllModels_currentRowChanged(int currentRow);
+
 private:
     Ui::MainWindow *ui;
     QHash<QString, QList<Model>> models;

@@ -25,6 +25,10 @@ void MainWindow::on_pushButtonAddModelFile_clicked() {
     this->openFileAndExtractAttributes();
 }
 
+void MainWindow::on_listWidgetAllModels_currentRowChanged(int currentRow) {
+    this->populateSelectedModelAttributes(currentRow);
+}
+
 // Actions
 
 void MainWindow::populateSelectedModelAttributes(int index) {
@@ -59,7 +63,7 @@ void MainWindow::openFileAndExtractAttributes() {
     QListIterator<Model> i(models["models"]);
     while (i.hasNext()) {
         if ( modelName == i.next().name) {
-            this->showError("Model with the given name is already added.");
+            this->showError("Duplicate model name.");
             return;
         }
     }
@@ -100,7 +104,7 @@ void MainWindow::openFileAndExtractAttributes() {
     if (models["models"].length() == 0) {
         models["models"] = QList<Model>();
         models["models"].append(model);
-        populateSelectedModelAttributes(0);
+        this->populateSelectedModelAttributes(0);
     }else {
         models["models"].append(model);
     }
