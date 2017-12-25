@@ -22,8 +22,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QHash<QString, QHash<QString, QString>> models;
+
     QHash<QString, QString> parseAttribute(QString str);
     QString getModelName(QString fileName);
+    void openFileAndExtractAttributes();
 };
 
 #endif // MAINWINDOW_H

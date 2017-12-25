@@ -11,14 +11,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
-
 }
 
 MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::openFileAndExtractAttributes(int modelNumber) {
+void MainWindow::openFileAndExtractAttributes() {
 
     QString str = ui->moduleName->text();
     QString fileName = "/Projects/B2BOrderingiOS/B2BOrdering/Model/Profile.swift";
@@ -103,5 +102,5 @@ QHash<QString, QString> MainWindow::parseAttribute(QString str) {
 }
 
 void MainWindow::on_pushButtonModel_1_clicked() {
-    this->openFileAndExtractAttributes(1);
+    this->openFileAndExtractAttributes();
 }
