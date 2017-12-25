@@ -269,7 +269,7 @@
              </layout>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButtonModelRemove_2">
+             <widget class="QPushButton" name="pushButtonRemoveStructure">
               <property name="minimumSize">
                <size>
                 <width>0</width>

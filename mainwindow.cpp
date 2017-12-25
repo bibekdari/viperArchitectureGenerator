@@ -78,6 +78,23 @@ void MainWindow::on_listWidgetAllStructures_currentRowChanged(int currentRow) {
     this->populateSelectedStructureAttributes(currentRow);
 }
 
+void MainWindow::on_pushButtonRemoveStructure_clicked() {
+    QModelIndexList selectedIndex = ui->listWidgetAllStructures->selectionModel()->selectedIndexes();
+    QListIterator<QModelIndex> i(selectedIndex);
+    while (i.hasNext()) {
+        int index = i.next().row();
+        structures.removeAt(index);
+        ui->listWidgetAllStructures->reset();
+        delete ui->listWidgetAllStructures->takeItem(index);
+    }
+
+    if (structures.length() > 0) {
+        populateSelectedStructureAttributes(0);
+    }else {
+        clearSelectedStructureAttributes();
+    }
+}
+
 // Actions
 
 void MainWindow::populateSelectedModelAttributes(int index) {
@@ -115,6 +132,11 @@ void MainWindow::populateSelectedStructureAttributes(int index) {
     }
 
     ui->labelSelectedStructureName->setText(structure.name);
+}
+
+void MainWindow::clearSelectedStructureAttributes() {
+    ui->labelSelectedStructureName->setText("");
+    ui->listWidgetSelectedStructureAttributes->clear();
 }
 
 void MainWindow::showError(QString text) {
@@ -224,3 +246,4 @@ QHash<QString, QString> MainWindow::parseAttribute(QString str) {
 
     return result;
 }
+

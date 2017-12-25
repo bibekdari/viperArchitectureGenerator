@@ -20,12 +20,12 @@ public:
 private slots:
     void on_pushButtonAddModelFile_clicked();
     void on_listWidgetAllModels_currentRowChanged(int currentRow);
-
     void on_pushButtonRemoveModel_clicked();
-
     void on_pushButtonCreateStructureForSelectedModels_clicked();
-
     void on_listWidgetAllStructures_currentRowChanged(int currentRow);
+
+
+    void on_pushButtonRemoveStructure_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -39,6 +39,7 @@ private:
     void populateSelectedModelAttributes(int index);
     void clearSelectedModelAttributes();
     void populateSelectedStructureAttributes(int index);
+    void clearSelectedStructureAttributes();
     void showError(QString text);
 
     int indexOfStructure(QString name);
