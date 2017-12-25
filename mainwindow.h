@@ -25,6 +25,8 @@ private slots:
 
     void on_pushButtonCreateStructureForSelectedModels_clicked();
 
+    void on_listWidgetAllStructures_currentRowChanged(int currentRow);
+
 private:
     Ui::MainWindow *ui;
     QList<Model> models;

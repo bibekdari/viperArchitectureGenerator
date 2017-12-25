@@ -74,6 +74,9 @@ void MainWindow::on_pushButtonCreateStructureForSelectedModels_clicked() {
     }
 }
 
+void MainWindow::on_listWidgetAllStructures_currentRowChanged(int currentRow) {
+    this->populateSelectedStructureAttributes(currentRow);
+}
 
 // Actions
 
