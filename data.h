@@ -7,4 +7,4 @@ struct Model {
     QString name;
     QString filePath;
     QHash<QString, QString> attributes;
-}
+};

@@ -24,9 +24,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-209</y>
+         <y>0</y>
          <width>944</width>
-         <height>1406</height>
+         <height>1410</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
@@ -155,7 +155,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_6">
+             <widget class="QListWidget" name="listWidgetAllModels">
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
               </property>
@@ -183,7 +183,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButtonModel_1">
+               <widget class="QPushButton" name="pushButtonAddModelFile">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -366,10 +366,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditModelName_1"/>
+             <widget class="QLabel" name="labelSelectedModelName">
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_2">
+             <widget class="QListWidget" name="listWidgetSelectedModelAttributes">
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -438,7 +442,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditStructureName_1"/>
+             <widget class="QLabel" name="labelSelectedModelName_2">
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QListWidget" name="listWidget">
@@ -516,7 +524,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditViewModelName_1"/>
+             <widget class="QLabel" name="labelSelectedModelName_3">
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QListWidget" name="listWidget_3">
@@ -787,6 +799,26 @@
           </property>
           <property name="text">
            <string>CELLS AND VIEW CONTROLLER</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="pushButton_14">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>36</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>GENERATE</string>
           </property>
          </widget>
         </item>

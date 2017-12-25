@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QHash>
+#include <data.h>
 
 namespace Ui {
 class MainWindow;
@@ -17,15 +18,19 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButtonModel_1_clicked();
+    void on_pushButtonAddModelFile_clicked();
 
 private:
     Ui::MainWindow *ui;
-    QHash<QString, QHash<QString, QString>> models;
+    QHash<QString, QList<Model>> models;
 
     QHash<QString, QString> parseAttribute(QString str);
     QString getModelName(QString fileName);
     void openFileAndExtractAttributes();
+
+    void populateSelectedModelAttributes(int index);
+
+    void showError(QString text);
 };
 
 #endif // MAINWINDOW_H

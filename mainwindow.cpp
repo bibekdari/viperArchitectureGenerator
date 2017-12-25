@@ -6,22 +6,63 @@
 #include <QFile>
 #include <QRegExp>
 #include <QColor>
+#include <QListIterator>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    models = QHash<QString, QList<Model>>();
 }
 
 MainWindow::~MainWindow() {
     delete ui;
 }
 
+// Events
+void MainWindow::on_pushButtonAddModelFile_clicked() {
+    this->openFileAndExtractAttributes();
+}
+
+// Actions
+
+void MainWindow::populateSelectedModelAttributes(int index) {
+    Model model = models["models"][index];
+    QHashIterator<QString, QString> i(model.attributes);
+    while (i.hasNext()) {
+        i.next();
+        QString text = i.key() + ": " + i.value();
+        ui->listWidgetSelectedModelAttributes->addItem(text);
+    }
+    ui->labelSelectedModelName->setText(model.name);
+}
+
+void MainWindow::showError(QString text) {
+    QMessageBox messageBox;
+    messageBox.critical(0,"Error",text);
+    messageBox.setFixedSize(500,200);
+}
+
+
+
+// Private functions: Handle model file and model attributes
 void MainWindow::openFileAndExtractAttributes() {
 
     QString str = ui->moduleName->text();
     QString fileName = "/Projects/B2BOrderingiOS/B2BOrdering/Model/Profile.swift";
-    //QFileDialog::getOpenFileName(this, tr("Open Model"), "/home", tr("Image Files (*.Swift)"));
+    //    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Model"), "/home", tr("Image Files (*.Swift)"));
+
+    QString moduleName = ui->moduleName->text();
+    QString modelName = this->getModelName(fileName);
+
+    QListIterator<Model> i(models["models"]);
+    while (i.hasNext()) {
+        if ( modelName == i.next().name) {
+            this->showError("Model with the given name is already added.");
+            return;
+        }
+    }
 
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -38,6 +79,7 @@ void MainWindow::openFileAndExtractAttributes() {
 
         if (isAttributeEnd) {
             hasAttributeRecStarted = false;
+            break;
         }
 
         if (hasAttributeRecStarted && isAttribute) {
@@ -50,22 +92,20 @@ void MainWindow::openFileAndExtractAttributes() {
         }
     }
 
-    //    this->attributes.append(attributes);
+    Model model = Model();
+    model.attributes = attributes;
+    model.filePath = fileName;
+    model.name = modelName;
 
-    QHashIterator<QString, QString> i(attributes);
-    QString text = "";
-    while (i.hasNext()) {
-        i.next();
-        text.append(i.key() + ": " + i.value());
+    if (models["models"].length() == 0) {
+        models["models"] = QList<Model>();
+        models["models"].append(model);
+        populateSelectedModelAttributes(0);
+    }else {
+        models["models"].append(model);
     }
 
-    QString moduleName = ui->moduleName->text();
-    QString modelName = this->getModelName(fileName);
-//    UIComponents component = this->uiComponents[modelNumber];
-//    component.model->setText(text);
-//    component.modelName->setText(modelName);
-//    component.structureName->setText(moduleName.append(modelName).append("Structure"));
-//    component.viewModelName->setText(moduleName.append(modelName).append("ViewModel"));
+    ui->listWidgetAllModels->addItem(modelName);
 }
 
 QString MainWindow::getModelName(QString fileName) {
@@ -99,8 +139,4 @@ QHash<QString, QString> MainWindow::parseAttribute(QString str) {
     result[attributeName.trimmed()] = attributeType.trimmed();
 
     return result;
-}
-
-void MainWindow::on_pushButtonModel_1_clicked() {
-    this->openFileAndExtractAttributes();
 }
