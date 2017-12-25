@@ -59,9 +59,43 @@ void MainWindow::on_listWidgetAllModels_currentRowChanged(int currentRow) {
     this->populateSelectedModelAttributes(currentRow);
 }
 
+void MainWindow::on_pushButtonCreateNewModel_clicked() {
+
+    if (!isModuleNameValid()) {
+        return;
+    }
+
+    QString modelName = ui->lineEditNewModelName->text();
+    modelName.replace(QRegularExpression("[\\s\\n\\r]+"), "");
+
+    if (!validateName(modelName, "Model name")) {
+        return;
+    }
+
+    if (!isModelUnique(modelName)) {
+        this->showError("Duplicate name.");
+        return;
+    }
+
+    Model model = Model();
+    model.name = modelName;
+    model.attributes = QHash<QString, QString>();
+    models.append(model);
+
+    ui->listWidgetAllModels->addItem(modelName);
+
+    if (models.length() == 1) {
+        populateSelectedModelAttributes(0);
+    }
+}
+
 // structures
 
 void MainWindow::on_pushButtonCreateStructureForSelectedModels_clicked() {
+    if (!isModuleNameValid()) {
+        return;
+    }
+
     // get all selected models and create structures for them
     ui->listWidgetAllStructures->reset();
 
@@ -111,9 +145,42 @@ void MainWindow::on_pushButtonRemoveStructure_clicked() {
     }
 }
 
+void MainWindow::on_pushButtonCreateNewStructure_clicked() {
+    if (!isModuleNameValid()) {
+        return;
+    }
+
+    QString structureName = ui->lineEditNewStructureName->text();
+    structureName.replace(QRegularExpression("[\\s\\n\\r]+"), "");
+
+    if (!validateName(structureName, "Structure name")) {
+        return;
+    }
+
+    if (!isStructureUnique(structureName)) {
+        this->showError("Duplicate name.");
+        return;
+    }
+
+    Structure structure = Structure();
+    structure.name = structureName;
+    structure.attributes = QHash<QString, QHash<QString, QString>>();
+    structures.append(structure);
+
+    ui->listWidgetAllStructures->addItem(structureName);
+
+    if (structures.length() == 1) {
+        populateSelectedStructureAttributes(0);
+    }
+}
+
 // view models
 
 void MainWindow::on_pushButtonCreateViewModelForSelectedStructures_clicked() {
+    if (!isModuleNameValid()) {
+        return;
+    }
+
     // get all selected structures and create viewModels for them
     ui->listWidgetAllViewModels->reset();
 
@@ -178,6 +245,35 @@ void MainWindow::on_pushButtonRemoveViewModel_clicked() {
 
 void MainWindow::on_listWidgetAllViewModels_currentRowChanged(int currentRow) {
     this->populateSelectedViewModelAttributes(currentRow);
+}
+
+void MainWindow::on_pushButtonCreateNewViewModel_clicked() {
+    if (!isModuleNameValid()) {
+        return;
+    }
+
+    QString viewModelName = ui->lineEditNewViewModelName->text();
+    viewModelName.replace(QRegularExpression("[\\s\\n\\r]+"), "");
+
+    if (!validateName(viewModelName, "View model name")) {
+        return;
+    }
+
+    if (!isViewModelUnique(viewModelName)) {
+        this->showError("Duplicate name.");
+        return;
+    }
+
+    ViewModel viewModel = ViewModel();
+    viewModel.name = viewModelName;
+    viewModel.attributes = QHash<QString, QHash<QString, QString>>();
+    viewModels.append(viewModel);
+
+    ui->listWidgetAllViewModels->addItem(viewModelName);
+
+    if (viewModels.length() == 1) {
+        populateSelectedViewModelAttributes(0);
+    }
 }
 
 
@@ -261,6 +357,55 @@ void MainWindow::showError(QString text) {
     messageBox.setFixedSize(500,200);
 }
 
+bool MainWindow::isModelUnique(QString modelName) {
+    QListIterator<Model> i(models);
+    while (i.hasNext()) {
+        if ( modelName == i.next().name) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool MainWindow::isStructureUnique(QString modelName) {
+    QListIterator<Structure> i(structures);
+    while (i.hasNext()) {
+        if ( modelName == i.next().name) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool MainWindow::isViewModelUnique(QString modelName) {
+    QListIterator<ViewModel> i(viewModels);
+    while (i.hasNext()) {
+        if ( modelName == i.next().name) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool MainWindow::validateName(QString name, QString paramName) {
+    if (name.length() == 0) {
+        showError("Empty " + paramName);
+        return false;
+    }
+
+    QRegExp exp("[a-zA-Z0-1]+");
+    if (!exp.exactMatch(name)) {
+        showError(paramName + "  must be alpha numeric.");
+        return false;
+    }
+
+    if (name[0].isDigit()) {
+        showError(paramName + " can't start with number.");
+        return false;
+    }
+    return true;
+}
+
 // Private functions: Helpers
 int MainWindow::indexOfStructure(QString name) {
     for (int i=0; i<structures.length(); i++) {
@@ -269,6 +414,11 @@ int MainWindow::indexOfStructure(QString name) {
         }
     }
     return -1;
+}
+
+bool MainWindow::isModuleNameValid() {
+    QString moduleName = ui->moduleName->text();
+    validateName(moduleName, "Module name");
 }
 
 // Private functions: Handle model file and model attributes
@@ -281,12 +431,9 @@ void MainWindow::openFileAndExtractAttributes() {
     QString moduleName = ui->moduleName->text();
     QString modelName = this->getModelName(fileName);
 
-    QListIterator<Model> i(models);
-    while (i.hasNext()) {
-        if ( modelName == i.next().name) {
-            this->showError("Duplicate model name.");
-            return;
-        }
+    if (!isModelUnique(modelName)) {
+        this->showError("Duplicate model name.");
+        return;
     }
 
     QFile file(fileName);
