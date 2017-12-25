@@ -23,6 +23,8 @@ private slots:
 
     void on_pushButtonRemoveModel_clicked();
 
+    void on_pushButtonCreateStructureForSelectedModels_clicked();
+
 private:
     Ui::MainWindow *ui;
     QList<Model> models;
@@ -34,8 +36,10 @@ private:
 
     void populateSelectedModelAttributes(int index);
     void clearSelectedModelAttributes();
-
+    void populateSelectedStructureAttributes(int index);
     void showError(QString text);
+
+    int indexOfStructure(QString name);
 };
 
 #endif // MAINWINDOW_H

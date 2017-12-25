@@ -28,7 +28,6 @@ void MainWindow::on_pushButtonAddModelFile_clicked() {
 
 void MainWindow::on_pushButtonRemoveModel_clicked() {
     QModelIndexList selectedIndex = ui->listWidgetAllModels->selectionModel()->selectedIndexes();
-
     QListIterator<QModelIndex> i(selectedIndex);
     while (i.hasNext()) {
         int index = i.next().row();
@@ -44,18 +43,43 @@ void MainWindow::on_pushButtonRemoveModel_clicked() {
     }
 }
 
-void MainWindow::clearSelectedModelAttributes() {
-    ui->labelSelectedModelName->setText("");
-    ui->listWidgetSelectedModelAttributes->clear();
-}
-
 void MainWindow::on_listWidgetAllModels_currentRowChanged(int currentRow) {
     this->populateSelectedModelAttributes(currentRow);
 }
 
+void MainWindow::on_pushButtonCreateStructureForSelectedModels_clicked() {
+    ui->listWidgetAllStructures->reset();
+
+    QModelIndexList selectedIndex = ui->listWidgetAllModels->selectionModel()->selectedIndexes();
+    QListIterator<QModelIndex> i(selectedIndex);
+    while (i.hasNext()) {
+        int index = i.next().row();
+        Model model = models[index];
+        Structure structure = Structure();
+        structure.name = model.name + "Structure";
+        structure.attributes = QHash<QString, QHash<QString, QString>>();
+        structure.attributes[model.name] = model.attributes;
+
+        int structIndex = indexOfStructure(structure.name);
+        if (structIndex >= 0) {
+            structures.removeAt(structIndex);
+            delete ui->listWidgetAllStructures->takeItem(structIndex);
+        }
+        structures.append(structure);
+        ui->listWidgetAllStructures->addItem(structure.name);
+    }
+
+    if (structures.length() > 0) {
+        populateSelectedStructureAttributes(0);
+    }
+}
+
+
 // Actions
 
 void MainWindow::populateSelectedModelAttributes(int index) {
+    ui->listWidgetSelectedModelAttributes->clear();
+
     Model model = models[index];
     QHashIterator<QString, QString> i(model.attributes);
     while (i.hasNext()) {
@@ -66,13 +90,45 @@ void MainWindow::populateSelectedModelAttributes(int index) {
     ui->labelSelectedModelName->setText(model.name);
 }
 
+void MainWindow::clearSelectedModelAttributes() {
+    ui->labelSelectedModelName->setText("");
+    ui->listWidgetSelectedModelAttributes->clear();
+}
+
+
+void MainWindow::populateSelectedStructureAttributes(int index) {
+    ui->listWidgetSelectedStructureAttributes->clear();
+    Structure structure = structures[index];
+    QHashIterator<QString, QHash<QString, QString>> i(structure.attributes);
+    while (i.hasNext()) {
+        i.next();
+        QHash<QString, QString> attributes = i.value();
+        QHashIterator<QString, QString> j(attributes);
+        while(j.hasNext()) {
+            j.next();
+            QString text = i.key() + " -> " + j.key() + ": " + j.value();
+            ui->listWidgetSelectedStructureAttributes->addItem(text);
+        }
+    }
+
+    ui->labelSelectedStructureName->setText(structure.name);
+}
+
 void MainWindow::showError(QString text) {
     QMessageBox messageBox;
     messageBox.critical(0,"Error",text);
     messageBox.setFixedSize(500,200);
 }
 
-
+// Private functions: Helpers
+int MainWindow::indexOfStructure(QString name) {
+    for (int i=0; i<structures.length(); i++) {
+        if (structures[i].name == name) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 // Private functions: Handle model file and model attributes
 void MainWindow::openFileAndExtractAttributes() {

@@ -156,6 +156,9 @@
             </item>
             <item>
              <widget class="QListWidget" name="listWidgetAllModels">
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
               </property>
@@ -218,7 +221,7 @@
              </layout>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_11">
+             <widget class="QPushButton" name="pushButtonCreateStructureForSelectedModels">
               <property name="text">
                <string>Create Structures for Selected Models</string>
               </property>
@@ -242,7 +245,10 @@
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget_5">
+             <widget class="QListWidget" name="listWidgetAllStructures">
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
               </property>
@@ -305,6 +311,9 @@
                 <width>0</width>
                 <height>200</height>
                </size>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>true</bool>
               </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
@@ -380,6 +389,9 @@
                 <height>200</height>
                </size>
               </property>
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
               <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
               </property>
@@ -442,14 +454,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="labelSelectedModelName_2">
+             <widget class="QLabel" name="labelSelectedStructureName">
               <property name="text">
                <string>TextLabel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="listWidget">
+             <widget class="QListWidget" name="listWidgetSelectedStructureAttributes">
               <property name="dragEnabled">
                <bool>true</bool>
               </property>
