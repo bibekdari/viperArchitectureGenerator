@@ -78,7 +78,7 @@ void MainWindow::on_pushButtonCreateNewModel_clicked() {
     }
 
     Model model = Model();
-    model.name = getModuleName() + modelName;
+    model.name = modelName;
     model.attributes = QHash<QString, QString>();
     models.append(model);
 
