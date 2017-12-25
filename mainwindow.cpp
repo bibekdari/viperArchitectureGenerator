@@ -29,7 +29,10 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
+
 // Events
+
+// models
 void MainWindow::on_pushButtonAddModelFile_clicked() {
     this->openFileAndExtractAttributes();
 }
@@ -55,6 +58,8 @@ void MainWindow::on_pushButtonRemoveModel_clicked() {
 void MainWindow::on_listWidgetAllModels_currentRowChanged(int currentRow) {
     this->populateSelectedModelAttributes(currentRow);
 }
+
+// structures
 
 void MainWindow::on_pushButtonCreateStructureForSelectedModels_clicked() {
     // get all selected models and create structures for them
@@ -105,6 +110,8 @@ void MainWindow::on_pushButtonRemoveStructure_clicked() {
         clearSelectedStructureAttributes();
     }
 }
+
+// view models
 
 void MainWindow::on_pushButtonCreateViewModelForSelectedStructures_clicked() {
     // get all selected structures and create viewModels for them
@@ -169,6 +176,9 @@ void MainWindow::on_pushButtonRemoveViewModel_clicked() {
    }
 }
 
+void MainWindow::on_listWidgetAllViewModels_currentRowChanged(int currentRow) {
+    this->populateSelectedViewModelAttributes(currentRow);
+}
 
 
 // ACTIONS

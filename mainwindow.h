@@ -29,6 +29,10 @@ private slots:
 
     void on_pushButtonCreateViewModelForSelectedStructures_clicked();
 
+    void on_pushButtonRemoveViewModel_clicked();
+
+    void on_listWidgetAllViewModels_currentRowChanged(int currentRow);
+
 private:
     Ui::MainWindow *ui;
     QStringList swiftUIs;
