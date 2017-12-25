@@ -384,6 +384,11 @@ void MainWindow::on_listWidgetSelectedViewModelAttributes_currentRowChanged(int 
 
 void MainWindow::on_pushButtonAddUpdateModelAttribute_clicked() {
 
+    if (selectedModel.filePath.length() > 0) {
+        showError("This model is created from file.");
+        return;
+    }
+
     QString text = ui->lineEditSelectedModelAttributeName->text();
     if (text.trimmed().length() == 0) {
         return;
@@ -404,6 +409,12 @@ void MainWindow::on_pushButtonAddUpdateModelAttribute_clicked() {
 }
 
 void MainWindow::on_pushButtonRemoveSelectedAttributes_clicked() {
+
+    if (selectedModel.filePath.length() > 0) {
+        showError("This model is created from file.");
+        return;
+    }
+
     // get selected index, remove items from attributes of selected models and ui
     QModelIndexList selectedIndexes = ui->listWidgetSelectedModelAttributes->selectionModel()->selectedIndexes();
     ui->listWidgetSelectedModelAttributes->reset();
