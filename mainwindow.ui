@@ -24,9 +24,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-371</y>
+         <y>0</y>
          <width>944</width>
-         <height>1357</height>
+         <height>1406</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
@@ -178,7 +178,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>Remove Selected</string>
+                 <string>Remove</string>
                 </property>
                </widget>
               </item>
@@ -270,7 +270,7 @@
                </size>
               </property>
               <property name="text">
-               <string>Remove Selected</string>
+               <string>Remove</string>
               </property>
              </widget>
             </item>
@@ -305,6 +305,20 @@
              </widget>
             </item>
             <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <item>
+               <widget class="QLineEdit" name="lineEdit_7"/>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_8">
+                <property name="text">
+                 <string>Add New</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <widget class="QPushButton" name="pushButtonModelRemove">
               <property name="minimumSize">
                <size>
@@ -319,7 +333,7 @@
                </size>
               </property>
               <property name="text">
-               <string>Remove Selected</string>
+               <string>Remove</string>
               </property>
              </widget>
             </item>
@@ -361,21 +375,21 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_13">
-              <property name="text">
-               <string>Add Attributes</string>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="lineEdit_9"/>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_17">
               <item>
-               <widget class="QLineEdit" name="lineEdit_9"/>
-              </item>
-              <item>
                <widget class="QPushButton" name="pushButton_17">
                 <property name="text">
-                 <string>Add</string>
+                 <string>Add/Update</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_9">
+                <property name="text">
+                 <string>Remove</string>
                 </property>
                </widget>
               </item>

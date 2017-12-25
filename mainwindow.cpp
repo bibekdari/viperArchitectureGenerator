@@ -10,57 +10,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
-    uiComponents = QList<UIComponents>();
     ui->setupUi(this);
-
-    UIComponents component1 = UIComponents(ui->textEditAttributesModel_1,
-                                           ui->labelModelName_1,
-                                           ui->textEditStructureModel_1,
-                                           ui->lineEditStructureName_1,
-                                           ui->textEditViewModel_1,
-                                           ui->lineEditViewModelName_1);
-
-    UIComponents component2 = UIComponents(ui->textEditAttributesModel_2,
-                                           ui->labelModelName_2,
-                                           ui->textEditStructureModel_2,
-                                           ui->lineEditStructureName_2,
-                                           ui->textEditViewModel_2,
-                                           ui->lineEditViewModelName_2);
-
-    UIComponents component3 = UIComponents(ui->textEditAttributesModel_3,
-                                           ui->labelModelName_3,
-                                           ui->textEditStructureModel_3,
-                                           ui->lineEditStructureName_3,
-                                           ui->textEditViewModel_3,
-                                           ui->lineEditViewModelName_3);
-
-    UIComponents component4 = UIComponents(ui->textEditAttributesModel_4,
-                                           ui->labelModelName_4,
-                                           ui->textEditStructureModel_4,
-                                           ui->lineEditStructureName_4,
-                                           ui->textEditViewModel_4,
-                                           ui->lineEditViewModelName_4);
-
-    UIComponents component5 = UIComponents(ui->textEditAttributesModel_5,
-                                           ui->labelModelName_5,
-                                           ui->textEditStructureModel_5,
-                                           ui->lineEditStructureName_5,
-                                           ui->textEditViewModel_5,
-                                           ui->lineEditViewModelName_5);
-
-    UIComponents component6 = UIComponents(ui->textEditAttributesModel_6,
-                                           ui->labelModelName_6,
-                                           ui->textEditStructureModel_6,
-                                           ui->lineEditStructureName_6,
-                                           ui->textEditViewModel_6,
-                                           ui->lineEditViewModelName_6);
-
-    uiComponents.append(component1);
-    uiComponents.append(component2);
-    uiComponents.append(component3);
-    uiComponents.append(component4);
-    uiComponents.append(component5);
-    uiComponents.append(component6);
 
 }
 
@@ -112,11 +62,11 @@ void MainWindow::openFileAndExtractAttributes(int modelNumber) {
 
     QString moduleName = ui->moduleName->text();
     QString modelName = this->getModelName(fileName);
-    UIComponents component = this->uiComponents[modelNumber];
-    component.model->setText(text);
-    component.modelName->setText(modelName);
-    component.structureName->setText(moduleName.append(modelName).append("Structure"));
-    component.viewModelName->setText(moduleName.append(modelName).append("ViewModel"));
+//    UIComponents component = this->uiComponents[modelNumber];
+//    component.model->setText(text);
+//    component.modelName->setText(modelName);
+//    component.structureName->setText(moduleName.append(modelName).append("Structure"));
+//    component.viewModelName->setText(moduleName.append(modelName).append("ViewModel"));
 }
 
 QString MainWindow::getModelName(QString fileName) {

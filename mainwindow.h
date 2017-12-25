@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QHash>
-#include <uicomponents.h>
 
 namespace Ui {
 class MainWindow;
@@ -22,11 +21,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    // QList<QHash<QString, QString>> attributes;
-    QList<UIComponents> uiComponents;
-
+    QHash<QString, QHash<QString, QString>> models;
     QHash<QString, QString> parseAttribute(QString str);
-    void openFileAndExtractAttributes(int modelNumber);
     QString getModelName(QString fileName);
 };
 
