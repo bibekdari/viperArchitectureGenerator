@@ -13,7 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) {
     ui->setupUi(this);
+
+    // list of all possible ui where we show data
     swiftUIs << "UIButton" << "UILabel" << "UIImageView" << "UITextFied" << "UITextView";
+
+    // list of all swift data type
     swiftDataTypes << "Double" << "Int" << "Float" << "String" << "NSNumber" << "Bool" << "UInt";
 
     models = QList<Model>();
@@ -31,6 +35,7 @@ void MainWindow::on_pushButtonAddModelFile_clicked() {
 }
 
 void MainWindow::on_pushButtonRemoveModel_clicked() {
+    // get selected index, remove items from models and ui
     QModelIndexList selectedIndex = ui->listWidgetAllModels->selectionModel()->selectedIndexes();
     QListIterator<QModelIndex> i(selectedIndex);
     while (i.hasNext()) {
@@ -52,6 +57,7 @@ void MainWindow::on_listWidgetAllModels_currentRowChanged(int currentRow) {
 }
 
 void MainWindow::on_pushButtonCreateStructureForSelectedModels_clicked() {
+    // get all selected models and create structures for them
     ui->listWidgetAllStructures->reset();
 
     QModelIndexList selectedIndex = ui->listWidgetAllModels->selectionModel()->selectedIndexes();
@@ -83,6 +89,7 @@ void MainWindow::on_listWidgetAllStructures_currentRowChanged(int currentRow) {
 }
 
 void MainWindow::on_pushButtonRemoveStructure_clicked() {
+     // get selected index, remove items from structures and ui
     QModelIndexList selectedIndex = ui->listWidgetAllStructures->selectionModel()->selectedIndexes();
     QListIterator<QModelIndex> i(selectedIndex);
     while (i.hasNext()) {
@@ -100,6 +107,7 @@ void MainWindow::on_pushButtonRemoveStructure_clicked() {
 }
 
 void MainWindow::on_pushButtonCreateViewModelForSelectedStructures_clicked() {
+    // get all selected structures and create viewModels for them
     ui->listWidgetAllViewModels->reset();
 
     QModelIndexList selectedIndex = ui->listWidgetAllStructures->selectionModel()->selectedIndexes();
@@ -115,8 +123,8 @@ void MainWindow::on_pushButtonCreateViewModelForSelectedStructures_clicked() {
         viewModel.name = viewModelName;
         viewModel.attributes = QHash<QString, QHash<QString, QString>>();
 
+        // get all attributes of structure
         QHash<QString, QString> allAttributes = QHash<QString, QString>();
-
         QHashIterator<QString, QHash<QString, QString>> i(structure.attributes);
         while (i.hasNext()) {
             i.next();
@@ -127,11 +135,6 @@ void MainWindow::on_pushButtonCreateViewModelForSelectedStructures_clicked() {
                 allAttributes[j.key()] = j.value();
             }
         }
-
-
-
-
-
         viewModel.attributes[structure.name] = allAttributes;
 
         int viewModelIndex = indexOfStructure(viewModel.name);
@@ -146,6 +149,24 @@ void MainWindow::on_pushButtonCreateViewModelForSelectedStructures_clicked() {
     if (structures.length() > 0) {
         populateSelectedViewModelAttributes(0);
     }
+}
+
+void MainWindow::on_pushButtonRemoveViewModel_clicked() {
+    // get selected index, remove items from view models and ui
+   QModelIndexList selectedIndex = ui->listWidgetAllViewModels->selectionModel()->selectedIndexes();
+   QListIterator<QModelIndex> i(selectedIndex);
+   while (i.hasNext()) {
+       int index = i.next().row();
+       viewModels.removeAt(index);
+       ui->listWidgetAllViewModels->reset();
+       delete ui->listWidgetAllViewModels->takeItem(index);
+   }
+
+   if (viewModels.length() > 0) {
+       populateSelectedViewModelAttributes(0);
+   }else {
+       clearSelectedViewModelAttributes();
+   }
 }
 
 
