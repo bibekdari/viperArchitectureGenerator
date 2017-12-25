@@ -20,6 +20,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // list of all swift data type
     swiftDataTypes << "Double" << "Int" << "Float" << "String" << "NSNumber" << "Bool" << "UInt";
 
+    selectedModel = Model();
+    selectedStructure = Structure();
+    selectedViewModel = ViewModel();
+
     models = QList<Model>();
     structures = QList<Structure>();
     viewModels = QList<ViewModel>();
@@ -29,7 +33,8 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-
+// TOP LEVEL
+//........................TOP LEVEL.....TOP LEVEL..........TOP LEVEL.................
 // Events
 
 // models
@@ -292,11 +297,13 @@ void MainWindow::populateSelectedModelAttributes(int index) {
         ui->listWidgetSelectedModelAttributes->addItem(text);
     }
     ui->labelSelectedModelName->setText(model.name);
+    selectedModel = model;
 }
 
 void MainWindow::clearSelectedModelAttributes() {
     ui->labelSelectedModelName->setText("");
     ui->listWidgetSelectedModelAttributes->clear();
+    selectedModel = Model();
 }
 
 // Structures
@@ -317,11 +324,13 @@ void MainWindow::populateSelectedStructureAttributes(int index) {
     }
 
     ui->labelSelectedStructureName->setText(structure.name);
+    selectedStructure = structure;
 }
 
 void MainWindow::clearSelectedStructureAttributes() {
     ui->labelSelectedStructureName->setText("");
     ui->listWidgetSelectedStructureAttributes->clear();
+    selectedStructure = Structure();
 }
 
 // View Models
@@ -342,11 +351,33 @@ void MainWindow::populateSelectedViewModelAttributes(int index) {
     }
 
     ui->labelSelectedViewModelName->setText(viewModel.name);
+    selectedViewModel = viewModel;
 }
 
 void MainWindow::clearSelectedViewModelAttributes() {
     ui->labelSelectedViewModelName->setText("");
     ui->listWidgetSelectedViewModelAttributes->clear();
+    selectedViewModel = ViewModel();
+}
+
+// SECOND LEVEL
+//.........SECOND LEVEL..........SECOND LEVEL..............SECOND LEVEL...................
+
+// EVENTS
+
+void MainWindow::on_listWidgetSelectedModelAttributes_currentRowChanged(int currentRow) {
+    QString text = ui->listWidgetSelectedModelAttributes->currentItem()->text();
+    ui->lineEditSelectedModelAttributeName->setText(text);
+}
+
+void MainWindow::on_listWidgetSelectedStructureAttributes_currentRowChanged(int currentRow) {
+    QString text = ui->listWidgetSelectedStructureAttributes->currentItem()->text();
+    ui->lineEditSelectedStructureAttributeName->setText(text);
+}
+
+void MainWindow::on_listWidgetSelectedViewModelAttributes_currentRowChanged(int currentRow) {
+    QString text = ui->listWidgetSelectedViewModelAttributes->currentItem()->text();
+    ui->lineEditSelectedViewModelAttributeName->setText(text);
 }
 
 // Others

@@ -29,10 +29,9 @@ private slots:
     void on_pushButtonRemoveViewModel_clicked();
     void on_listWidgetAllViewModels_currentRowChanged(int currentRow);
     void on_pushButtonCreateNewModel_clicked();
-
     void on_pushButtonCreateNewStructure_clicked();
-
     void on_pushButtonCreateNewViewModel_clicked();
+    void on_listWidgetSelectedModelAttributes_currentRowChanged(int currentRow);
 
 private:
     Ui::MainWindow *ui;
@@ -41,6 +40,10 @@ private:
     QList<Model> models;
     QList<Structure> structures;
     QList<ViewModel> viewModels;
+
+    Model selectedModel;
+    Structure selectedStructure;
+    ViewModel selectedViewModel;
 
     QHash<QString, QString> parseAttribute(QString str);
     QString getModelName(QString fileName);
