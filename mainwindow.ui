@@ -24,7 +24,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-209</y>
          <width>944</width>
          <height>1406</height>
         </rect>
@@ -216,6 +216,13 @@
                </widget>
               </item>
              </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_11">
+              <property name="text">
+               <string>Create Structures for Selected Models</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
