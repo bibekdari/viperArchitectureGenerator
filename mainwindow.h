@@ -45,6 +45,8 @@ private slots:
 
     void on_pushButtonRemoveStructureSelectedAttributes_clicked();
 
+    void on_pushButtonRemoveViewModelSelectedAttributes_clicked();
+
 private:
     Ui::MainWindow *ui;
     QStringList swiftUIs;

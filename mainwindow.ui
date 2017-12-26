@@ -575,7 +575,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
-               <widget class="QPushButton" name="pushButton_13">
+               <widget class="QPushButton" name="pushButtonRemoveViewModelSelectedAttributes">
                 <property name="text">
                  <string>Remove</string>
                 </property>

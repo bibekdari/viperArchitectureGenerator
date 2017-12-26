@@ -492,6 +492,27 @@ void MainWindow::on_pushButtonRemoveStructureSelectedAttributes_clicked() {
     }
 }
 
+// View Model
+
+void MainWindow::on_pushButtonRemoveViewModelSelectedAttributes_clicked() {
+
+    // get selected index, remove items from attributes of selected view model and ui
+    QModelIndexList selectedIndexes = ui->listWidgetSelectedViewModelAttributes->selectionModel()->selectedIndexes();
+    ui->listWidgetSelectedViewModelAttributes->reset();
+
+    foreach (QModelIndex index, selectedIndexes) {
+        QStringList splitted = index.data(Qt::DisplayRole).toString().split(" -> ");
+        QString structureName = splitted.first();
+        QString text = splitted.last();
+        selectedViewModel.attributes[structureName].remove(parseAttribute(text).key);
+        delete ui->listWidgetSelectedViewModelAttributes->takeItem(index.row());
+    }
+    int index = indexOfViewModel(selectedViewModel.name);
+    if (index >= 0) {
+        viewModels[index] = selectedViewModel;
+    }
+}
+
 
 // Others
 
