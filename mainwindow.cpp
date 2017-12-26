@@ -569,8 +569,12 @@ void MainWindow::on_pushButtonRemoveView_clicked() {
     ui->listWidgetAllViews->reset();
 
     foreach (QModelIndex index, selectedIndexes) {
-        views.removeAt(index.row());
-        delete ui->listWidgetAllViews->takeItem(index.row());
+        QString text = index.data(Qt::DisplayRole).toString();
+        // Dont delete default view controller
+        if (text != "Default-UIViewController") {
+            views.removeAt(index.row());
+            delete ui->listWidgetAllViews->takeItem(index.row());
+        }
     }
 
     int index = indexOfView(selectedView.name);
