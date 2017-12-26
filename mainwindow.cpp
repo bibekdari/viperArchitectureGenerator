@@ -15,7 +15,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // list of all possible ui where we show data
-    swiftUIs << "UILabel" << "UIButton" << "UIImageView" << "UITextFied" << "UITextView";
+    swiftUIs["UILabel"] = "Label";
+    swiftUIs["UIButton"] = "Button";
+    swiftUIs["UIImageView"] = "ImageView";
+    swiftUIs["UITextFied"] = "TextField";
+    swiftUIs["UITextView"] = "TextView";
+
+    ui->comboBoxSelectedViewAttributeUIType->addItems(swiftUIs.keys());
 
     // list of all swift data type
     swiftDataTypes << "Double" << "Int" << "Float" << "String" << "NSNumber" << "Bool" << "UInt";
@@ -37,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     View view = View();
     view.name = "Default-UIViewController";
-    view.attributes = QHash<QString, QHash<QString, QString>>();
+    view.attributes =  QHash<QString, QHash<QString, KeyVal>>();
     views.append(view);
     populateSelectedViewAttributes(0);
 }
@@ -561,7 +567,7 @@ void MainWindow::on_pushButtonCreateNewView_clicked() {
     View view = View();
     view.name = getModuleName() + name;
     view.type = type;
-    view.attributes = QHash<QString, QHash<QString, QString>>();
+    view.attributes =  QHash<QString, QHash<QString, KeyVal>>();
 
     views.append(view);
 
@@ -613,7 +619,7 @@ void MainWindow::on_pushButtonBindSelectedViewModelsToSelectedView_clicked() {
         ViewModel viewModel = viewModels[index];
 
         // get all attributes of structure
-        QHash<QString, QString> allAttributes = QHash<QString, QString>();
+        QHash<QString, KeyVal> allAttributes = QHash<QString, KeyVal>();
         QHashIterator<QString, QHash<QString, QString>> i(viewModel.attributes);
         while (i.hasNext()) {
             i.next();
@@ -621,7 +627,10 @@ void MainWindow::on_pushButtonBindSelectedViewModelsToSelectedView_clicked() {
             QHashIterator<QString, QString> j(attributes);
             while(j.hasNext()) {
                 j.next();
-                allAttributes[j.key()] = j.value();
+                KeyVal attrib = KeyVal();
+                attrib.key = j.value();
+                attrib.value = "UILabel";
+                allAttributes[j.key()] = attrib;
             }
         }
         selectedView.attributes[viewModel.name] = allAttributes;
@@ -630,19 +639,54 @@ void MainWindow::on_pushButtonBindSelectedViewModelsToSelectedView_clicked() {
     populateSelectedViewAttributes(viewIndex);
 }
 
+void MainWindow::on_listWidgetSelectedViewAttributes_currentRowChanged(int currentRow) {
+    QStringList list = swiftUIs.keys();
+    QString text = ui->listWidgetSelectedViewAttributes->currentItem()->text().split(" -> ").last();
+    KeyVal parsed = parseAttribute(text);
+    ui->comboBoxSelectedViewAttributeUIType->setCurrentText(parsed.value);
+}
+
+void MainWindow::on_pushButtonAssignUITypeToSelectedAttribute_clicked() {
+    QString selectedString = ui->listWidgetSelectedViewAttributes->currentItem()->text();
+    QHashIterator<QString, QHash<QString, KeyVal>> i(selectedView.attributes);
+    while (i.hasNext()) {
+        i.next();
+        QHash<QString, KeyVal> attrib = i.value();
+        QHashIterator<QString, KeyVal> j(attrib);
+        while(j.hasNext()) {
+            j.next();
+            QString suffix = swiftUIs[j.value().value];
+            QString text = i.key() + " -> " + j.key() + suffix + ": " + j.value().value;
+            KeyVal valAndType = j.value();
+            if (text == selectedString) {
+                valAndType.value = ui->comboBoxSelectedViewAttributeUIType->currentText();
+            }
+            attrib[j.key()] = valAndType;
+        }
+        selectedView.attributes[i.key()] = attrib;
+    }
+
+    int index = indexOfView(selectedView.name);
+    if (index >= 0) {
+        views[index] = selectedView;
+        populateSelectedViewAttributes(index);
+    }
+}
+
 void MainWindow::populateSelectedViewAttributes(int index) {
     ui->listWidgetSelectedViewAttributes->reset();
     ui->listWidgetSelectedViewAttributes->clear();
 
     View view = views[index];
-    QHashIterator<QString, QHash<QString, QString>> i(view.attributes);
+    QHashIterator<QString, QHash<QString, KeyVal>> i(view.attributes);
     while (i.hasNext()) {
         i.next();
-        QHash<QString, QString> attributes = i.value();
-        QHashIterator<QString, QString> j(attributes);
+        QHash<QString, KeyVal> attributes = i.value();
+        QHashIterator<QString, KeyVal> j(attributes);
         while(j.hasNext()) {
             j.next();
-            QString text = i.key() + " -> " + j.key() + ": " + j.value();
+            QString suffix = swiftUIs[j.value().value];
+            QString text = i.key() + " -> " + j.key() + suffix + ": " + j.value().value;
             ui->listWidgetSelectedViewAttributes->addItem(text);
         }
     }

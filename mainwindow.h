@@ -45,9 +45,13 @@ private slots:
     void on_listWidgetAllViews_currentRowChanged(int currentRow);
     void on_pushButtonBindSelectedViewModelsToSelectedView_clicked();
 
+    void on_listWidgetSelectedViewAttributes_currentRowChanged(int currentRow);
+
+    void on_pushButtonAssignUITypeToSelectedAttribute_clicked();
+
 private:
     Ui::MainWindow *ui;
-    QStringList swiftUIs;
+    QHash<QString, QString> swiftUIs;
     QStringList swiftDataTypes;
     QList<Model> models;
     QList<Structure> structures;

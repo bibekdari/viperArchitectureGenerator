@@ -27,5 +27,5 @@ struct KeyVal {
 struct View {
     QString name;
     QString type;
-    QHash<QString, QHash<QString, QString>> attributes;
+    QHash<QString, QHash<QString, KeyVal>> attributes;
 };
