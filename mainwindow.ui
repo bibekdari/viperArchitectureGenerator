@@ -24,7 +24,7 @@
        <property name="geometry">
         <rect>
          <x>-289</x>
-         <y>-142</y>
+         <y>-407</y>
          <width>1233</width>
          <height>1217</height>
         </rect>
@@ -823,7 +823,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButtonSendSelectedStructureAttribsToSelectedViewModel_2">
+             <widget class="QPushButton" name="pushButtonBindSelectedViewModelsToSelectedView">
               <property name="minimumSize">
                <size>
                 <width>0</width>

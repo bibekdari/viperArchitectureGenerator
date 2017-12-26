@@ -263,7 +263,7 @@ void MainWindow::on_pushButtonRemoveViewModel_clicked() {
     int index = indexOfViewModel(selectedViewModel.name);
     if (index >= 0) {
         populateSelectedViewModelAttributes(index);
-    }else if (structures.count() > 0) {
+    }else if (viewModels.count() > 0) {
         populateSelectedViewModelAttributes(0);
     }else {
         clearSelectedViewModelAttributes();
@@ -540,6 +540,11 @@ void MainWindow::on_pushButtonRemoveViewModelSelectedAttributes_clicked() {
 
 
 void MainWindow::on_pushButtonCreateNewView_clicked() {
+
+    if (!isModuleNameValid()) {
+        return;
+    }
+
     QString name = ui->lineEditNewViewName->text();
     QString type = ui->comboBoxViewType->currentText();
     name.replace(QRegularExpression("[\\s\\n\\r]+"), "");
@@ -554,7 +559,7 @@ void MainWindow::on_pushButtonCreateNewView_clicked() {
     }
 
     View view = View();
-    view.name = name;
+    view.name = getModuleName() + name;
     view.type = type;
     view.attributes = QHash<QString, QHash<QString, QString>>();
 
@@ -589,6 +594,40 @@ void MainWindow::on_pushButtonRemoveView_clicked() {
 
 void MainWindow::on_listWidgetAllViews_currentRowChanged(int currentRow) {
     populateSelectedViewAttributes(currentRow);
+}
+
+void MainWindow::on_pushButtonBindSelectedViewModelsToSelectedView_clicked() {
+
+    int viewIndex = ui->listWidgetAllViews->currentRow();
+    if (viewIndex < 0) {
+        return;
+    }
+
+    // get all selected structures and create viewModels for them
+    ui->listWidgetSelectedViewAttributes->reset();
+
+    QModelIndexList selectedIndex = ui->listWidgetAllViewModels->selectionModel()->selectedIndexes();
+    QListIterator<QModelIndex> i(selectedIndex);
+    while (i.hasNext()) {
+        int index = i.next().row();
+        ViewModel viewModel = viewModels[index];
+
+        // get all attributes of structure
+        QHash<QString, QString> allAttributes = QHash<QString, QString>();
+        QHashIterator<QString, QHash<QString, QString>> i(viewModel.attributes);
+        while (i.hasNext()) {
+            i.next();
+            QHash<QString, QString> attributes = i.value();
+            QHashIterator<QString, QString> j(attributes);
+            while(j.hasNext()) {
+                j.next();
+                allAttributes[j.key()] = j.value();
+            }
+        }
+        selectedView.attributes[viewModel.name] = allAttributes;
+    }
+    views[viewIndex] = selectedView;
+    populateSelectedViewAttributes(viewIndex);
 }
 
 void MainWindow::populateSelectedViewAttributes(int index) {

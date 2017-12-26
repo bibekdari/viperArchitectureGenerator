@@ -42,8 +42,8 @@ private slots:
     void on_pushButtonRemoveViewModelSelectedAttributes_clicked();
     void on_pushButtonCreateNewView_clicked();
     void on_pushButtonRemoveView_clicked();
-
     void on_listWidgetAllViews_currentRowChanged(int currentRow);
+    void on_pushButtonBindSelectedViewModelsToSelectedView_clicked();
 
 private:
     Ui::MainWindow *ui;
