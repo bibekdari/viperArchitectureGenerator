@@ -34,18 +34,16 @@ private slots:
     void on_listWidgetSelectedModelAttributes_currentRowChanged(int currentRow);
     void on_pushButtonAddUpdateModelAttribute_clicked();
     void on_pushButtonRemoveSelectedAttributes_clicked();
-
     void on_pushButtonSendSelectedModelAttribsToSelectedStructure_clicked();
-
     void on_pushButtonClearSelectedModelAttribSelection_clicked();
-
     void on_pushButtonClearSelectedStructureAttribSelection_clicked();
-
     void on_pushButtonSendSelectedStructureAttribsToSelectedViewModel_clicked();
-
     void on_pushButtonRemoveStructureSelectedAttributes_clicked();
-
     void on_pushButtonRemoveViewModelSelectedAttributes_clicked();
+    void on_pushButtonCreateNewView_clicked();
+    void on_pushButtonRemoveView_clicked();
+
+    void on_listWidgetAllViews_currentRowChanged(int currentRow);
 
 private:
     Ui::MainWindow *ui;
@@ -54,10 +52,13 @@ private:
     QList<Model> models;
     QList<Structure> structures;
     QList<ViewModel> viewModels;
+    QList<View> views;
 
     Model selectedModel;
     Structure selectedStructure;
     ViewModel selectedViewModel;
+    View selectedView;
+
 
     KeyVal parseAttribute(QString str);
     QString getModelName(QString fileName);
@@ -76,12 +77,17 @@ private:
 //    void populateSelectedViewModelAttributes(ViewModel viewModel);
     void clearSelectedViewModelAttributes();
 
+    bool isViewUnique(QString modelName);
+    void populateSelectedViewAttributes(int index);
+    void clearSelectedViewAttributes();
+
     bool validateName(QString name, QString paramName);
     void showError(QString text);
 
     int indexOfStructure(QString name);
     int indexOfModel(QString name);
     int indexOfViewModel(QString name);
+    int indexOfView(QString name);
     bool isModuleNameValid();
     QString getModuleName();
 };

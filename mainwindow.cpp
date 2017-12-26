@@ -23,10 +23,23 @@ MainWindow::MainWindow(QWidget *parent) :
     selectedModel = Model();
     selectedStructure = Structure();
     selectedViewModel = ViewModel();
+    selectedView = View();
 
     models = QList<Model>();
     structures = QList<Structure>();
     viewModels = QList<ViewModel>();
+    views = QList<View>();
+
+    QStringList allowedViews;
+    allowedViews << "UIView" << "UICollectionViewCell" << "UITableViewCell";
+    ui->comboBoxViewType->addItems(allowedViews);
+    ui->listWidgetAllViews->addItem("Default-UIViewController");
+
+    View view = View();
+    view.name = "Default-UIViewController";
+    view.attributes = QHash<QString, QHash<QString, QString>>();
+    views.append(view);
+    populateSelectedViewAttributes(0);
 }
 
 MainWindow::~MainWindow() {
@@ -53,7 +66,10 @@ void MainWindow::on_pushButtonRemoveModel_clicked() {
         delete ui->listWidgetAllModels->takeItem(index);
     }
 
-    if (models.length() > 0) {
+    int index = indexOfModel(selectedModel.name);
+    if (index >= 0) {
+        populateSelectedModelAttributes(index);
+    }else if (models.count() > 0) {
         populateSelectedModelAttributes(0);
     }else {
         clearSelectedModelAttributes();
@@ -143,7 +159,10 @@ void MainWindow::on_pushButtonRemoveStructure_clicked() {
         delete ui->listWidgetAllStructures->takeItem(index);
     }
 
-    if (structures.length() > 0) {
+    int index = indexOfStructure(selectedStructure.name);
+    if (index >= 0) {
+        populateSelectedStructureAttributes(index);
+    }else if (structures.count() > 0) {
         populateSelectedStructureAttributes(0);
     }else {
         clearSelectedStructureAttributes();
@@ -241,7 +260,10 @@ void MainWindow::on_pushButtonRemoveViewModel_clicked() {
         delete ui->listWidgetAllViewModels->takeItem(index);
     }
 
-    if (viewModels.length() > 0) {
+    int index = indexOfViewModel(selectedViewModel.name);
+    if (index >= 0) {
+        populateSelectedViewModelAttributes(index);
+    }else if (structures.count() > 0) {
         populateSelectedViewModelAttributes(0);
     }else {
         clearSelectedViewModelAttributes();
@@ -514,6 +536,94 @@ void MainWindow::on_pushButtonRemoveViewModelSelectedAttributes_clicked() {
 }
 
 
+//--------VIEW RELATED -------------------VIEW RELATED ------------- VIEW RELATED ------------------VIEW RELATED ----------
+
+
+void MainWindow::on_pushButtonCreateNewView_clicked() {
+    QString name = ui->lineEditNewViewName->text();
+    QString type = ui->comboBoxViewType->currentText();
+    name.replace(QRegularExpression("[\\s\\n\\r]+"), "");
+
+    if (!validateName(name, "View name")) {
+        return;
+    }
+
+    if (!isViewUnique(name)) {
+        showError("Duplicate name.");
+        return;
+    }
+
+    View view = View();
+    view.name = name;
+    view.type = type;
+    view.attributes = QHash<QString, QHash<QString, QString>>();
+
+    views.append(view);
+
+    ui->listWidgetAllViews->addItem(view.name);
+}
+
+void MainWindow::on_pushButtonRemoveView_clicked() {
+    // get selected index, remove selected views
+    QModelIndexList selectedIndexes = ui->listWidgetAllViews->selectionModel()->selectedIndexes();
+    ui->listWidgetAllViews->reset();
+
+    foreach (QModelIndex index, selectedIndexes) {
+        views.removeAt(index.row());
+        delete ui->listWidgetAllViews->takeItem(index.row());
+    }
+
+    int index = indexOfView(selectedView.name);
+    if (index >= 0) {
+        populateSelectedViewAttributes(index);
+    }else if (views.count() > 0) {
+        populateSelectedViewAttributes(0);
+    }else {
+        clearSelectedViewAttributes();
+    }
+}
+
+void MainWindow::on_listWidgetAllViews_currentRowChanged(int currentRow) {
+    populateSelectedViewAttributes(currentRow);
+}
+
+void MainWindow::populateSelectedViewAttributes(int index) {
+    ui->listWidgetSelectedViewAttributes->reset();
+    ui->listWidgetSelectedViewAttributes->clear();
+
+    View view = views[index];
+    QHashIterator<QString, QHash<QString, QString>> i(view.attributes);
+    while (i.hasNext()) {
+        i.next();
+        QHash<QString, QString> attributes = i.value();
+        QHashIterator<QString, QString> j(attributes);
+        while(j.hasNext()) {
+            j.next();
+            QString text = i.key() + " -> " + j.key() + ": " + j.value();
+            ui->listWidgetSelectedViewAttributes->addItem(text);
+        }
+    }
+
+    ui->labelSelectedViewName->setText(view.name);
+    selectedView = view;
+}
+
+void MainWindow::clearSelectedViewAttributes() {
+    ui->listWidgetSelectedViewAttributes->clear();
+    ui->labelSelectedViewName->setText("");
+    selectedView = View();
+}
+
+bool MainWindow::isViewUnique(QString viewName) {
+    QListIterator<View> i(views);
+    while (i.hasNext()) {
+        if ( viewName == i.next().name) {
+            return false;
+        }
+    }
+    return true;
+}
+
 // Others
 
 void MainWindow::showError(QString text) {
@@ -593,6 +703,15 @@ int MainWindow::indexOfModel(QString name) {
 int MainWindow::indexOfViewModel(QString name) {
     for (int i=0; i<viewModels.length(); i++) {
         if (viewModels[i].name == name) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int MainWindow::indexOfView(QString name) {
+    for (int i=0; i<views.length(); i++) {
+        if (views[i].name == name) {
             return i;
         }
     }

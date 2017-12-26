@@ -23,3 +23,9 @@ struct KeyVal {
     QString key;
     QString value;
 };
+
+struct View {
+    QString name;
+    QString type;
+    QHash<QString, QHash<QString, QString>> attributes;
+};
