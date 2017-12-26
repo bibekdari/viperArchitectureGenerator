@@ -343,6 +343,7 @@ void MainWindow::clearSelectedModelAttributes() {
 // Structures
 
 void MainWindow::populateSelectedStructureAttributes(int index) {
+    ui->listWidgetSelectedStructureAttributes->reset();
     ui->listWidgetSelectedStructureAttributes->clear();
     Structure structure = structures[index];
     QHashIterator<QString, QHash<QString, QString>> i(structure.attributes);
@@ -370,6 +371,7 @@ void MainWindow::clearSelectedStructureAttributes() {
 // View Models
 
 void MainWindow::populateSelectedViewModelAttributes(int index) {
+    ui->listWidgetSelectedViewModelAttributes->reset();
     ui->listWidgetSelectedViewModelAttributes->clear();
     ViewModel viewModel = viewModels[index];
     QHashIterator<QString, QHash<QString, QString>> i(viewModel.attributes);
@@ -520,6 +522,29 @@ void MainWindow::on_pushButtonRemoveStructureSelectedAttributes_clicked() {
     }
 }
 
+void MainWindow::on_listWidgetSelectedStructureAttributes_currentRowChanged(int currentRow) {
+    QString text = ui->listWidgetSelectedStructureAttributes->currentItem()->text().split(" -> ").last();
+    KeyVal parsed = parseAttribute(text);
+    ui->comboBoxSelectedStrctureAttributeType->setCurrentText(parsed.value);
+}
+
+void MainWindow::on_pushButtonAssignTypeToSelectedStructureAttribute_clicked() {
+    // get selected index, edit item type
+    QModelIndexList selectedIndexes = ui->listWidgetSelectedStructureAttributes->selectionModel()->selectedIndexes();
+
+    foreach (QModelIndex index, selectedIndexes) {
+        QStringList splitted = index.data(Qt::DisplayRole).toString().split(" -> ");
+        QString modelName = splitted.first();
+        KeyVal parsed = parseAttribute(splitted.last());
+        selectedStructure.attributes[modelName][parsed.key] = ui->comboBoxSelectedStrctureAttributeType->currentText();
+    }
+    int index = indexOfStructure(selectedStructure.name);
+    if (index >= 0) {
+        structures[index] = selectedStructure;
+        populateSelectedStructureAttributes(index);
+    }
+}
+
 // View Model
 
 void MainWindow::on_pushButtonRemoveViewModelSelectedAttributes_clicked() {
@@ -538,6 +563,53 @@ void MainWindow::on_pushButtonRemoveViewModelSelectedAttributes_clicked() {
     int index = indexOfViewModel(selectedViewModel.name);
     if (index >= 0) {
         viewModels[index] = selectedViewModel;
+    }
+}
+
+void MainWindow::on_pushButtonSendSelectedViewModelAttribsToSelectedView_clicked() {
+    // get selected index, get selected items to selected view
+    QModelIndexList selectedIndexes = ui->listWidgetSelectedViewModelAttributes->selectionModel()->selectedIndexes();
+    ui->listWidgetSelectedViewAttributes->reset();
+
+    foreach (QModelIndex index, selectedIndexes) {
+        QStringList splitted = index.data(Qt::DisplayRole).toString().split(" -> ");
+        QString viewModelName = ui->labelSelectedViewModelName->text();
+        KeyVal parsedKeyValue = parseAttribute(splitted.last());
+        QHash<QString, KeyVal> attrib = selectedView.attributes[viewModelName];
+        KeyVal attribAndType = KeyVal();
+        attribAndType.key = parsedKeyValue.value;
+        attribAndType.value = "UILabel";
+        attrib[parsedKeyValue.key] = attribAndType;
+        selectedView.attributes[viewModelName] = attrib;
+    }
+    int index = indexOfView(selectedView.name);
+    if (index >= 0) {
+        views[index] = selectedView;
+        populateSelectedViewAttributes(index);
+    }
+}
+
+void MainWindow::on_listWidgetSelectedViewModelAttributes_currentRowChanged(int currentRow) {
+    QString text = ui->listWidgetSelectedViewModelAttributes->currentItem()->text().split(" -> ").last();
+    qDebug() << text;
+    KeyVal parsed = parseAttribute(text);
+    ui->comboBoxSelectedViewModelAttributeType->setCurrentText(parsed.value);
+}
+
+void MainWindow::on_pushButtonAssignTypeToSelectedViewModelAttribute_clicked() {
+    // get selected index, edit item type
+    QModelIndexList selectedIndexes = ui->listWidgetSelectedViewModelAttributes->selectionModel()->selectedIndexes();
+
+    foreach (QModelIndex index, selectedIndexes) {
+        QStringList splitted = index.data(Qt::DisplayRole).toString().split(" -> ");
+        QString modelName = splitted.first();
+        KeyVal parsed = parseAttribute(splitted.last());
+        selectedViewModel.attributes[modelName][parsed.key] = ui->comboBoxSelectedViewModelAttributeType->currentText();
+    }
+    int index = indexOfViewModel(selectedViewModel.name);
+    if (index >= 0) {
+        viewModels[index] = selectedViewModel;
+        populateSelectedViewModelAttributes(index);
     }
 }
 

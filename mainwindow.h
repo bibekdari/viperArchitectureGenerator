@@ -51,6 +51,16 @@ private slots:
 
     void on_pushButtonSelectedViewAttribute_clicked();
 
+    void on_pushButtonSendSelectedViewModelAttribsToSelectedView_clicked();
+
+    void on_pushButtonAssignTypeToSelectedStructureAttribute_clicked();
+
+    void on_pushButtonAssignTypeToSelectedViewModelAttribute_clicked();
+
+    void on_listWidgetSelectedStructureAttributes_currentRowChanged(int currentRow);
+
+    void on_listWidgetSelectedViewModelAttributes_currentRowChanged(int currentRow);
+
 private:
     Ui::MainWindow *ui;
     QHash<QString, QString> swiftUIs;
