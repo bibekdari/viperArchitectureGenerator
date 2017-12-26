@@ -24,7 +24,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-334</y>
          <width>944</width>
          <height>1410</height>
         </rect>
@@ -410,6 +410,13 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_17">
               <item>
+               <widget class="QPushButton" name="pushButtonClearSelectedModelAttribSelection">
+                <property name="text">
+                 <string>Clear Selection</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="pushButtonAddUpdateModelAttribute">
                 <property name="text">
                  <string>Add/Update</string>
@@ -435,7 +442,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_7">
+               <widget class="QPushButton" name="pushButtonSendSelectedModelAttribsToSelectedStructure">
                 <property name="text">
                  <string>Send</string>
                 </property>
@@ -488,6 +495,13 @@
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="QPushButton" name="pushButtonClearSelectedStructureAttribSelection">
+                <property name="text">
+                 <string>Clear Selection</string>
+                </property>
+               </widget>
+              </item>
               <item>
                <widget class="QPushButton" name="pushButton_4">
                 <property name="text">

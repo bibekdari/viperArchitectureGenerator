@@ -301,6 +301,10 @@ void MainWindow::populateSelectedModelAttributes(int index) {
     selectedModel = model;
 }
 
+//void MainWindow::populateSelectedModelAttributes(Model model) {
+
+//}
+
 void MainWindow::clearSelectedModelAttributes() {
     ui->labelSelectedModelName->setText("");
     ui->listWidgetSelectedModelAttributes->clear();
@@ -429,6 +433,34 @@ void MainWindow::on_pushButtonRemoveSelectedAttributes_clicked() {
         models[index] = selectedModel;
     }
 }
+
+void MainWindow::on_pushButtonSendSelectedModelAttribsToSelectedStructure_clicked() {
+    if (selectedStructure.name.length() == 0) {
+        showError("No structure selected.");
+    }
+
+    QModelIndexList selectedIndexes = ui->listWidgetSelectedModelAttributes->selectionModel()->selectedIndexes();
+    foreach (QModelIndex index, selectedIndexes) {
+        QString text = index.data(Qt::DisplayRole).toString();
+        KeyVal parsed = parseAttribute(text);
+        QString modelName = ui->labelSelectedModelName->text();
+        selectedStructure.attributes[modelName][parsed.key] = parsed.value;
+    }
+    int index = indexOfStructure(selectedStructure.name);
+    if (index >= 0) {
+        structures[index] = selectedStructure;
+        populateSelectedStructureAttributes(index);
+    }
+}
+
+void MainWindow::on_pushButtonClearSelectedModelAttribSelection_clicked() {
+    ui->listWidgetSelectedModelAttributes->reset();
+}
+
+void MainWindow::on_pushButtonClearSelectedStructureAttribSelection_clicked() {
+    ui->listWidgetSelectedStructureAttributes->reset();
+}
+
 
 // Others
 

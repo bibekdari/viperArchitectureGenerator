@@ -37,6 +37,12 @@ private slots:
     void on_pushButtonAddUpdateModelAttribute_clicked();
     void on_pushButtonRemoveSelectedAttributes_clicked();
 
+    void on_pushButtonSendSelectedModelAttribsToSelectedStructure_clicked();
+
+    void on_pushButtonClearSelectedModelAttribSelection_clicked();
+
+    void on_pushButtonClearSelectedStructureAttribSelection_clicked();
+
 private:
     Ui::MainWindow *ui;
     QStringList swiftUIs;
@@ -55,12 +61,15 @@ private:
 
     bool isModelUnique(QString modelName);
     void populateSelectedModelAttributes(int index);
+//    void populateSelectedModelAttributes(Model model);
     void clearSelectedModelAttributes();
     bool isStructureUnique(QString modelName);
     void populateSelectedStructureAttributes(int index);
+//    void populateSelectedStructureAttributes(Structure structure);
     void clearSelectedStructureAttributes();
     bool isViewModelUnique(QString modelName);
     void populateSelectedViewModelAttributes(int index);
+//    void populateSelectedViewModelAttributes(ViewModel viewModel);
     void clearSelectedViewModelAttributes();
 
     bool validateName(QString name, QString paramName);
