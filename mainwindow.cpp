@@ -461,6 +461,25 @@ void MainWindow::on_pushButtonClearSelectedStructureAttribSelection_clicked() {
     ui->listWidgetSelectedStructureAttributes->reset();
 }
 
+void MainWindow::on_pushButtonSendSelectedStructureAttribsToSelectedViewModel_clicked() {
+    if (selectedViewModel.name.length() == 0) {
+        showError("No view model selected.");
+    }
+
+    QModelIndexList selectedIndexes = ui->listWidgetSelectedStructureAttributes->selectionModel()->selectedIndexes();
+    foreach (QModelIndex index, selectedIndexes) {
+        QString text = index.data(Qt::DisplayRole).toString().split(" -> ").last();
+        KeyVal parsed = parseAttribute(text);
+        QString structureName = ui->labelSelectedStructureName->text();
+        selectedViewModel.attributes[structureName][parsed.key] = parsed.value;
+    }
+    int index = indexOfViewModel(selectedViewModel.name);
+    if (index >= 0) {
+        viewModels[index] = selectedViewModel;
+        populateSelectedViewModelAttributes(index);
+    }
+}
+
 
 // Others
 

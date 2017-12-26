@@ -43,6 +43,8 @@ private slots:
 
     void on_pushButtonClearSelectedStructureAttribSelection_clicked();
 
+    void on_pushButtonSendSelectedStructureAttribsToSelectedViewModel_clicked();
+
 private:
     Ui::MainWindow *ui;
     QStringList swiftUIs;
