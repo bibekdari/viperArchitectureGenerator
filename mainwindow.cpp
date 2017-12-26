@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // list of all possible ui where we show data
-    swiftUIs << "UIButton" << "UILabel" << "UIImageView" << "UITextFied" << "UITextView";
+    swiftUIs << "UILabel" << "UIButton" << "UIImageView" << "UITextFied" << "UITextView";
 
     // list of all swift data type
     swiftDataTypes << "Double" << "Int" << "Float" << "String" << "NSNumber" << "Bool" << "UInt";
@@ -565,7 +565,7 @@ void MainWindow::on_pushButtonCreateNewView_clicked() {
 
     views.append(view);
 
-    ui->listWidgetAllViews->addItem(view.name);
+    ui->listWidgetAllViews->addItem(view.name + ": " + view.type);
 }
 
 void MainWindow::on_pushButtonRemoveView_clicked() {
@@ -647,7 +647,7 @@ void MainWindow::populateSelectedViewAttributes(int index) {
         }
     }
 
-    ui->labelSelectedViewName->setText(view.name);
+    ui->labelSelectedViewName->setText(view.name + ": " + view.type);
     selectedView = view;
 }
 
