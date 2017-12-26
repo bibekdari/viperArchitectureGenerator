@@ -673,6 +673,32 @@ void MainWindow::on_pushButtonAssignUITypeToSelectedAttribute_clicked() {
     }
 }
 
+void MainWindow::on_pushButtonSelectedViewAttribute_clicked() {
+    QString selectedString = ui->listWidgetSelectedViewAttributes->currentItem()->text();
+    QHashIterator<QString, QHash<QString, KeyVal>> i(selectedView.attributes);
+    while (i.hasNext()) {
+        i.next();
+        QHash<QString, KeyVal> attrib = i.value();
+        QHashIterator<QString, KeyVal> j(attrib);
+        while(j.hasNext()) {
+            j.next();
+            QString suffix = swiftUIs[j.value().value];
+            QString text = i.key() + " -> " + j.key() + suffix + ": " + j.value().value;
+            KeyVal valAndType = j.value();
+            if (text == selectedString) {
+                attrib.remove(j.key());
+            }
+        }
+        selectedView.attributes[i.key()] = attrib;
+    }
+
+    int index = indexOfView(selectedView.name);
+    if (index >= 0) {
+        views[index] = selectedView;
+        populateSelectedViewAttributes(index);
+    }
+}
+
 void MainWindow::populateSelectedViewAttributes(int index) {
     ui->listWidgetSelectedViewAttributes->reset();
     ui->listWidgetSelectedViewAttributes->clear();

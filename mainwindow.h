@@ -49,6 +49,8 @@ private slots:
 
     void on_pushButtonAssignUITypeToSelectedAttribute_clicked();
 
+    void on_pushButtonSelectedViewAttribute_clicked();
+
 private:
     Ui::MainWindow *ui;
     QHash<QString, QString> swiftUIs;
