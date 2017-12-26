@@ -371,19 +371,10 @@ void MainWindow::clearSelectedViewModelAttributes() {
 
 // EVENTS
 
+// Models
 void MainWindow::on_listWidgetSelectedModelAttributes_currentRowChanged(int currentRow) {
     QString text = ui->listWidgetSelectedModelAttributes->currentItem()->text();
     ui->lineEditSelectedModelAttributeName->setText(text);
-}
-
-void MainWindow::on_listWidgetSelectedStructureAttributes_currentRowChanged(int currentRow) {
-    //    QString text = ui->listWidgetSelectedStructureAttributes->currentItem()->text();
-    //    ui->lineEditSelectedStructureAttributeName->setText(text);
-}
-
-void MainWindow::on_listWidgetSelectedViewModelAttributes_currentRowChanged(int currentRow) {
-    //    QString text = ui->listWidgetSelectedViewModelAttributes->currentItem()->text();
-    //    ui->lineEditSelectedViewModelAttributeName->setText(text);
 }
 
 void MainWindow::on_pushButtonAddUpdateModelAttribute_clicked() {
@@ -457,6 +448,8 @@ void MainWindow::on_pushButtonClearSelectedModelAttribSelection_clicked() {
     ui->listWidgetSelectedModelAttributes->reset();
 }
 
+// Structure
+
 void MainWindow::on_pushButtonClearSelectedStructureAttribSelection_clicked() {
     ui->listWidgetSelectedStructureAttributes->reset();
 }
@@ -477,6 +470,25 @@ void MainWindow::on_pushButtonSendSelectedStructureAttribsToSelectedViewModel_cl
     if (index >= 0) {
         viewModels[index] = selectedViewModel;
         populateSelectedViewModelAttributes(index);
+    }
+}
+
+void MainWindow::on_pushButtonRemoveStructureSelectedAttributes_clicked() {
+
+    // get selected index, remove items from attributes of selected structure and ui
+    QModelIndexList selectedIndexes = ui->listWidgetSelectedStructureAttributes->selectionModel()->selectedIndexes();
+    ui->listWidgetSelectedStructureAttributes->reset();
+
+    foreach (QModelIndex index, selectedIndexes) {
+        QStringList splitted = index.data(Qt::DisplayRole).toString().split(" -> ");
+        QString modelName = splitted.first();
+        QString text = splitted.last();
+        selectedStructure.attributes[modelName].remove(parseAttribute(text).key);
+        delete ui->listWidgetSelectedStructureAttributes->takeItem(index.row());
+    }
+    int index = indexOfStructure(selectedStructure.name);
+    if (index >= 0) {
+        structures[index] = selectedStructure;
     }
 }
 

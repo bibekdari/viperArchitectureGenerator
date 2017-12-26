@@ -32,8 +32,6 @@ private slots:
     void on_pushButtonCreateNewStructure_clicked();
     void on_pushButtonCreateNewViewModel_clicked();
     void on_listWidgetSelectedModelAttributes_currentRowChanged(int currentRow);
-    void on_listWidgetSelectedStructureAttributes_currentRowChanged(int currentRow);
-    void on_listWidgetSelectedViewModelAttributes_currentRowChanged(int currentRow);
     void on_pushButtonAddUpdateModelAttribute_clicked();
     void on_pushButtonRemoveSelectedAttributes_clicked();
 
@@ -44,6 +42,8 @@ private slots:
     void on_pushButtonClearSelectedStructureAttribSelection_clicked();
 
     void on_pushButtonSendSelectedStructureAttribsToSelectedViewModel_clicked();
+
+    void on_pushButtonRemoveStructureSelectedAttributes_clicked();
 
 private:
     Ui::MainWindow *ui;
