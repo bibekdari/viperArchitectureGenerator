@@ -1035,8 +1035,11 @@ void MainWindow::on_pushButtonGenerateModule_clicked() {
         dir.mkdir("Wireframe");
 
         dir.cd("Presenter");
-        dir.mkdir("Structures");
         this->copyFileContentByCreatingPath(dir.absolutePath(), "Presenter");
+        dir.mkdir("Structures");
+        dir.cd("Structures");
+        this->createStructures(dir);
+        dir.cdUp();
 
         dir.cd("../View");
         this->copyFileContentByCreatingPath(dir.absolutePath(), "ViewController");
@@ -1045,6 +1048,9 @@ void MainWindow::on_pushButtonGenerateModule_clicked() {
         QString sbOutputFilePath = dir.absolutePath() + "/" + moduleName + ".storyboard";
         this->copyFileContent(sbInputFilePath, sbOutputFilePath);
         dir.mkdir("ViewModels");
+        dir.cd("ViewModels");
+        this->createViewModels(dir);
+        dir.cdUp();
 
         dir.cd("../Wireframe");
         this->copyFileContentByCreatingPath(dir.absolutePath(), "Wireframe");
@@ -1085,3 +1091,74 @@ void MainWindow::copyFileContent(QString inputFilePath, QString outputFilePath) 
     inputFile.close();
     outputFile.close();
 }
+
+void MainWindow::createStructures(QDir dir) {
+    foreach (Structure structure, this->structures) {
+        QString filePath = dir.absolutePath() + "/" + structure.name + ".swift";
+        QFile outputFile(filePath);
+        if (!outputFile.open(QIODevice::ReadWrite | QIODevice::Text))
+            return;
+        QTextStream stream(&outputFile);
+
+        stream << "//" << endl <<
+               "//  " << structure.name << ".swift" << endl
+               << "//" << endl
+               << "//  Created by VIPER GENERATOR on " <<  QDate::currentDate().toString("dd/MM/yyyy") << "." << endl
+               << "//" << endl << endl
+               << "import Foundation" << endl << endl
+             << "struct " << structure.name << " {" << endl;
+
+
+
+        QHashIterator<QString, QHash<QString, QString>> i(structure.attributes);
+        while (i.hasNext()) {
+            i.next();
+            QHash<QString, QString> attributes = i.value();
+            QHashIterator<QString, QString> j(attributes);
+            while(j.hasNext()) {
+                j.next();
+                QString text = "    var " + j.key() + ": " + j.value() + "\n";
+                stream << text;
+            }
+        }
+
+        stream << "}" << endl;
+
+        outputFile.close();
+    }
+}
+
+void MainWindow::createViewModels(QDir dir) {
+    foreach (ViewModel viewModel, this->viewModels) {
+        QString filePath = dir.absolutePath() + "/" + viewModel.name + ".swift";
+        QFile outputFile(filePath);
+        if (!outputFile.open(QIODevice::ReadWrite | QIODevice::Text))
+            return;
+        QTextStream stream(&outputFile);
+
+        stream << "//" << endl <<
+               "//  " << viewModel.name << ".swift" << endl
+               << "//" << endl
+               << "//  Created by VIPER GENERATOR on " <<  QDate::currentDate().toString("dd/MM/yyyy") << "." << endl
+               << "//" << endl << endl
+               << "import Foundation" << endl << endl
+             << "class " << viewModel.name << " {" << endl;
+
+        QHashIterator<QString, QHash<QString, QString>> i(viewModel.attributes);
+        while (i.hasNext()) {
+            i.next();
+            QHash<QString, QString> attributes = i.value();
+            QHashIterator<QString, QString> j(attributes);
+            while(j.hasNext()) {
+                j.next();
+                QString text = "    var " + j.key() + ": " + j.value() + "\n";
+                stream << text;
+            }
+        }
+
+        stream << "}" << endl;
+
+        outputFile.close();
+    }
+}
+

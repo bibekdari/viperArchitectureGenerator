@@ -5,6 +5,7 @@
 #include <QHash>
 #include <data.h>
 #include <QStringList>
+#include <QDir>
 
 namespace Ui {
 class MainWindow;
@@ -110,6 +111,8 @@ private:
     void copyFileContentByCreatingPath(QString filePath, QString fileName);
     void copyFileContentByCreatingPath(QString filePath, QString fileName, QString extension);
     void copyFileContent(QString inputFilePath, QString outputFilePath);
+    void createStructures(QDir dir);
+    void createViewModels(QDir dir);
 };
 
 #endif // MAINWINDOW_H
