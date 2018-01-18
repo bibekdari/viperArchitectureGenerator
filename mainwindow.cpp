@@ -1015,20 +1015,55 @@ void MainWindow::on_pushButtonGenerateModule_clicked() {
         dir.mkdir("Application_Logic");
         dir.mkdir("Module_Interface");
         dir.mkdir("User_Interface");
+
         dir.cd("Application_Logic");
         dir.mkdir("Service");
         dir.mkdir("Interactor");
         dir.cd("Service");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "Service");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "ServiceType");
+        dir.cd("../Interactor");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "Interactor");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "InteractorIO");
 
-        this->copyFileContent(dir.absolutePath(), "Service.swift");
-        this->copyFileContent(dir.absolutePath(), "ServiceType.swift");
+        dir.cd("../../Module_Interface");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "ModuleInterface");
+
+        dir.cd("../User_Interface");
+        dir.mkdir("Presenter");
+        dir.mkdir("View");
+        dir.mkdir("Wireframe");
+
+        dir.cd("Presenter");
+        dir.mkdir("Structures");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "Presenter");
+
+        dir.cd("../View");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "ViewController");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "ViewInterface");
+        QString sbInputFilePath = ":/resource/Storyboard.storyboard";
+        QString sbOutputFilePath = dir.absolutePath() + "/" + moduleName + ".storyboard";
+        this->copyFileContent(sbInputFilePath, sbOutputFilePath);
+        dir.mkdir("ViewModels");
+
+        dir.cd("../Wireframe");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "Wireframe");
+        this->copyFileContentByCreatingPath(dir.absolutePath(), "WireframeInput");
 }
 
-void MainWindow::copyFileContent(QString filePath, QString fileName) {
-    QString moduleName = this->getModuleName();
-    QString inputFilePath = ":/MyServiceFile/" + fileName;
-    QString outputFilePath = filePath + "/" + moduleName + fileName;
+void MainWindow::copyFileContentByCreatingPath(QString filePath, QString fileName) {
+    this->copyFileContentByCreatingPath(filePath, fileName, ".swift");
+}
 
+void MainWindow::copyFileContentByCreatingPath(QString filePath, QString fileName, QString extension) {
+    QString moduleName = this->getModuleName();
+    QString inputFilePath = ":/resource/" + fileName + extension;
+    QString outputFilePath = filePath + "/" + moduleName + fileName + extension;
+    this->copyFileContent(inputFilePath, outputFilePath);
+}
+
+void MainWindow::copyFileContent(QString inputFilePath, QString outputFilePath) {
+    QString moduleName = this->getModuleName();
     QFile inputFile(inputFilePath);
     QFile outputFile(outputFilePath);
 

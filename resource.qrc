@@ -1,6 +1,15 @@
 <RCC>
-    <qresource prefix="/MyServiceFile">
-        <file>ServiceType.swift</file>
+    <qresource prefix="/resource">
+        <file>Storyboard.storyboard</file>
+        <file>WireframeInput.swift</file>
+        <file>Wireframe.swift</file>
+        <file>ViewInterface.swift</file>
+        <file>ViewController.swift</file>
+        <file>Presenter.swift</file>
+        <file>ModuleInterface.swift</file>
+        <file>InteractorIO.swift</file>
+        <file>Interactor.swift</file>
         <file>Service.swift</file>
+        <file>ServiceType.swift</file>
     </qresource>
 </RCC>

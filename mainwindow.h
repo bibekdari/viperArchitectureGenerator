@@ -107,7 +107,9 @@ private:
     int indexOfView(QString name);
     bool isModuleNameValid();
     QString getModuleName();
-    void copyFileContent(QString filePath, QString fileName);
+    void copyFileContentByCreatingPath(QString filePath, QString fileName);
+    void copyFileContentByCreatingPath(QString filePath, QString fileName, QString extension);
+    void copyFileContent(QString inputFilePath, QString outputFilePath);
 };
 
 #endif // MAINWINDOW_H
