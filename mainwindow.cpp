@@ -1004,57 +1004,57 @@ KeyVal MainWindow::parseAttribute(QString str) {
 }
 
 void MainWindow::on_pushButtonGenerateModule_clicked() {
-        if (!isModuleNameValid()) {
-            return;
-        }
-        QString moduleParentFolderPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-        QString moduleName = this->getModuleName();
-        QString moduleFolderPath = moduleParentFolderPath + "/" + moduleName;
-        QDir().mkdir(moduleFolderPath);
-        QDir dir = QDir(moduleFolderPath);
-        dir.mkdir("Application_Logic");
-        dir.mkdir("Module_Interface");
-        dir.mkdir("User_Interface");
+    if (!isModuleNameValid()) {
+        return;
+    }
+    QString moduleParentFolderPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    QString moduleName = this->getModuleName();
+    QString moduleFolderPath = moduleParentFolderPath + "/" + moduleName;
+    QDir().mkdir(moduleFolderPath);
+    QDir dir = QDir(moduleFolderPath);
+    dir.mkdir("Application_Logic");
+    dir.mkdir("Module_Interface");
+    dir.mkdir("User_Interface");
 
-        dir.cd("Application_Logic");
-        dir.mkdir("Service");
-        dir.mkdir("Interactor");
-        dir.cd("Service");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "Service");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "ServiceType");
-        dir.cd("../Interactor");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "Interactor");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "InteractorIO");
+    dir.cd("Application_Logic");
+    dir.mkdir("Service");
+    dir.mkdir("Interactor");
+    dir.cd("Service");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "Service");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "ServiceType");
+    dir.cd("../Interactor");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "Interactor");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "InteractorIO");
 
-        dir.cd("../../Module_Interface");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "ModuleInterface");
+    dir.cd("../../Module_Interface");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "ModuleInterface");
 
-        dir.cd("../User_Interface");
-        dir.mkdir("Presenter");
-        dir.mkdir("View");
-        dir.mkdir("Wireframe");
+    dir.cd("../User_Interface");
+    dir.mkdir("Presenter");
+    dir.mkdir("View");
+    dir.mkdir("Wireframe");
 
-        dir.cd("Presenter");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "Presenter");
-        dir.mkdir("Structures");
-        dir.cd("Structures");
-        this->createStructures(dir);
-        dir.cdUp();
+    dir.cd("Presenter");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "Presenter");
+    dir.mkdir("Structures");
+    dir.cd("Structures");
+    this->createStructures(dir);
+    dir.cdUp();
 
-        dir.cd("../View");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "ViewController");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "ViewInterface");
-        QString sbInputFilePath = ":/resource/Storyboard.storyboard";
-        QString sbOutputFilePath = dir.absolutePath() + "/" + moduleName + ".storyboard";
-        this->copyFileContent(sbInputFilePath, sbOutputFilePath);
-        dir.mkdir("ViewModels");
-        dir.cd("ViewModels");
-        this->createViewModels(dir);
-        dir.cdUp();
+    dir.cd("../View");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "ViewController");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "ViewInterface");
+    QString sbInputFilePath = ":/resource/Storyboard.storyboard";
+    QString sbOutputFilePath = dir.absolutePath() + "/" + moduleName + ".storyboard";
+    this->copyFileContent(sbInputFilePath, sbOutputFilePath);
+    dir.mkdir("ViewModels");
+    dir.cd("ViewModels");
+    this->createViewModels(dir);
+    dir.cdUp();
 
-        dir.cd("../Wireframe");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "Wireframe");
-        this->copyFileContentByCreatingPath(dir.absolutePath(), "WireframeInput");
+    dir.cd("../Wireframe");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "Wireframe");
+    this->copyFileContentByCreatingPath(dir.absolutePath(), "WireframeInput");
 }
 
 void MainWindow::copyFileContentByCreatingPath(QString filePath, QString fileName) {
@@ -1101,12 +1101,12 @@ void MainWindow::createStructures(QDir dir) {
         QTextStream stream(&outputFile);
 
         stream << "//" << endl <<
-               "//  " << structure.name << ".swift" << endl
+                  "//  " << structure.name << ".swift" << endl
                << "//" << endl
                << "//  Created by VIPER GENERATOR on " <<  QDate::currentDate().toString("dd/MM/yyyy") << "." << endl
                << "//" << endl << endl
                << "import Foundation" << endl << endl
-             << "struct " << structure.name << " {" << endl;
+               << "struct " << structure.name << " {" << endl;
 
 
 
@@ -1137,12 +1137,12 @@ void MainWindow::createViewModels(QDir dir) {
         QTextStream stream(&outputFile);
 
         stream << "//" << endl <<
-               "//  " << viewModel.name << ".swift" << endl
+                  "//  " << viewModel.name << ".swift" << endl
                << "//" << endl
                << "//  Created by VIPER GENERATOR on " <<  QDate::currentDate().toString("dd/MM/yyyy") << "." << endl
                << "//" << endl << endl
                << "import Foundation" << endl << endl
-             << "class " << viewModel.name << " {" << endl;
+               << "class " << viewModel.name << " {" << endl;
 
         QHashIterator<QString, QHash<QString, QString>> i(viewModel.attributes);
         while (i.hasNext()) {
@@ -1162,3 +1162,50 @@ void MainWindow::createViewModels(QDir dir) {
     }
 }
 
+void MainWindow::configureInteractor(QDir dir) {
+    QString moduleName = this->getModuleName();
+    QFile inputFile(":/resource/" + "Interactor");
+    QFile outputFile(dir.absolutePath() + "/" + moduleName + "Interactor.swift");
+
+    if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    if (!outputFile.open(QIODevice::ReadWrite | QIODevice::Text))
+        return;
+
+    QTextStream stream(&outputFile);
+
+    while (!inputFile.atEnd()) {
+        QString line = inputFile.readLine();
+        QString newLine = line.replace("--MODULENAME--", moduleName);
+        QString now = QDate::currentDate().toString("dd/MM/yyyy");
+        newLine = line.replace("--TODAY--", now);
+        stream << newLine;
+        if (newLine.contains("// MARK: Converting entities")) {
+            /*
+                private func convert(models: [HomeModel]) {
+                    let model = models.first
+                    self.output?.obtained(banners: self.convert(model: model))
+                    self.output?.obtained(categories: self.convert(model: model))
+                }
+            */
+            foreach (Model model, this->models) {
+//               QList<QHash<QString, QString>> relatedStructures;
+//               foreach (Structure structure, this->structures) {
+//                   QHashIterator<QString, QHash<QString, QString>> i(structure.attributes);
+//                   while (i.hasNext()) {
+//                       i.next();
+//                       if (i.key() == model.name) {
+//                           relatedStructures.append(i.value());
+//                       }
+//                   }
+//               }
+               stream << "    private func convert(model: " << model.name << ") {" << endl << endl << "    }" << endl;
+
+               stream << "//    private func convert(models: [" << model.name << "]) {" << endl  << endl << "    }";
+            }
+        }
+    }
+    inputFile.close();
+    outputFile.close();
+}
