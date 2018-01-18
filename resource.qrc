@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/MyServiceFile">
+        <file>ServiceType.swift</file>
+        <file>Service.swift</file>
+    </qresource>
+</RCC>

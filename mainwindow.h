@@ -60,6 +60,7 @@ private slots:
     void on_listWidgetSelectedStructureAttributes_currentRowChanged(int currentRow);
 
     void on_listWidgetSelectedViewModelAttributes_currentRowChanged(int currentRow);
+    void on_pushButtonGenerateModule_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -106,6 +107,7 @@ private:
     int indexOfView(QString name);
     bool isModuleNameValid();
     QString getModuleName();
+    void copyFileContent(QString filePath, QString fileName);
 };
 
 #endif // MAINWINDOW_H

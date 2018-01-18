@@ -8,6 +8,7 @@
 #include <QColor>
 #include <QListIterator>
 #include <QMessageBox>
+#include <QDate>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -953,6 +954,7 @@ void MainWindow::openFileAndExtractAttributes() {
             hasAttributeRecStarted = true;
         }
     }
+    file.close();
 
     Model model = Model();
     model.attributes = attributes;
@@ -999,4 +1001,52 @@ KeyVal MainWindow::parseAttribute(QString str) {
     result.value = attributeType.trimmed();
 
     return result;
+}
+
+void MainWindow::on_pushButtonGenerateModule_clicked() {
+        if (!isModuleNameValid()) {
+            return;
+        }
+        QString moduleParentFolderPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+        QString moduleName = this->getModuleName();
+        QString moduleFolderPath = moduleParentFolderPath + "/" + moduleName;
+        QDir().mkdir(moduleFolderPath);
+        QDir dir = QDir(moduleFolderPath);
+        dir.mkdir("Application_Logic");
+        dir.mkdir("Module_Interface");
+        dir.mkdir("User_Interface");
+        dir.cd("Application_Logic");
+        dir.mkdir("Service");
+        dir.mkdir("Interactor");
+        dir.cd("Service");
+
+        this->copyFileContent(dir.absolutePath(), "Service.swift");
+        this->copyFileContent(dir.absolutePath(), "ServiceType.swift");
+}
+
+void MainWindow::copyFileContent(QString filePath, QString fileName) {
+    QString moduleName = this->getModuleName();
+    QString inputFilePath = ":/MyServiceFile/" + fileName;
+    QString outputFilePath = filePath + "/" + moduleName + fileName;
+
+    QFile inputFile(inputFilePath);
+    QFile outputFile(outputFilePath);
+
+    if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    if (!outputFile.open(QIODevice::ReadWrite | QIODevice::Text))
+        return;
+
+    QTextStream stream(&outputFile);
+
+    while (!inputFile.atEnd()) {
+        QString line = inputFile.readLine();
+        QString newLine = line.replace("--MODULENAME--", moduleName);
+        QString now = QDate::currentDate().toString("dd/MM/yyyy");
+        newLine = line.replace("--TODAY--", now);
+        stream << newLine;
+    }
+    inputFile.close();
+    outputFile.close();
 }

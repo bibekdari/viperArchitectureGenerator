@@ -29,3 +29,13 @@ struct View {
     QString type;
     QHash<QString, QHash<QString, KeyVal>> attributes;
 };
+
+//struct Path {
+//     QString modulePath;
+
+//     init(QString modulePath) {
+//         this->modulePath = modulePath;
+//     }
+
+
+//};
